@@ -6,6 +6,10 @@ const AddToFavouitContext = createContext();
 export function AddToFavouitProvider({ children }) {
   const [myFavourits, setMyFavourit] = useLocalStorageState(`FAVOURITS`);
 
+  if(myFavourits === undefined){
+    setMyFavourit([])
+  }
+
   const handelMyFavourits = (proj) => {
     setMyFavourit((preFav) => [...preFav, proj]);
   };
