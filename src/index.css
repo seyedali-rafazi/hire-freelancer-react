@@ -1,0 +1,233 @@
+@import url("/fonts.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    .light-mode {
+      --background-app-rgb: 255, 255, 255;
+      --color-primary-900: 74, 109, 255;
+      --color-primary-800: 92, 124, 255;
+      --color-primary-700: 110, 138, 255;
+      --color-primary-600: 128, 153, 255;
+      --color-primary-500: 146, 167, 255;
+      --color-primary-400: 164, 182, 255;
+      --color-primary-300: 183, 197, 255;
+      --color-primary-200: 201, 211, 255;
+      --color-primary-100: 219, 226, 255;
+      --color-primary-50: 228, 233, 255;
+      --color-secondary-900: 17, 24, 39;
+      --color-secondary-800: 31, 41, 55;
+      --color-secondary-700: 55, 65, 81;
+      --color-secondary-600: 75, 85, 99;
+      --color-secondary-500: 107, 114, 128;
+      --color-secondary-400: 156, 163, 175;
+      --color-secondary-300: 209, 213, 219;
+      --color-secondary-200: 229, 231, 235;
+      --color-secondary-100: 243, 244, 246;
+      --color-secondary-50: 249, 250, 251;
+      --color-secondary-0: 255, 255, 255;
+      --color-success: 0, 192, 115;
+      --color-warning: 255, 153, 0;
+      --color-error: 255, 71, 87;
+      --color-red-500: 239, 68, 68;
+      --color-red-300: 252, 165, 165;
+    }
+    .dark-mode {
+      --background-app-rgb: 255, 255, 255;
+      --color-primary-900: 74, 109, 255;
+      --color-primary-800: 92, 124, 255;
+      --color-primary-700: 110, 138, 255;
+      --color-primary-600: 128, 153, 255;
+      --color-primary-500: 146, 167, 255;
+      --color-primary-400: 164, 182, 255;
+      --color-primary-300: 183, 197, 255;
+      --color-primary-200: 201, 211, 255;
+      --color-primary-100: 219, 226, 255;
+      --color-primary-50: 228, 233, 255;
+      --color-secondary-900: 249, 250, 251;
+      --color-secondary-800: 243, 244, 246;
+      --color-secondary-700: 229, 231, 235;
+      --color-secondary-600: 209, 213, 219;
+      --color-secondary-500: 156, 163, 175;
+      --color-secondary-400: 107, 114, 128;
+      --color-secondary-300: 75, 85, 99;
+      --color-secondary-200: 55, 65, 81;
+      --color-secondary-100: 31, 41, 55;
+      --color-secondary-50: 17, 24, 39;
+      --color-secondary-0: 24, 33, 47;
+      --backdrop-color: 0, 0, 0;
+    }
+
+}
+
+@layer components{
+  .textfield__input{
+                  @apply       
+                  w-full
+                  py-3
+                  px-4 
+                  rounded-xl
+                  text-secondery-400
+                  border
+                  border-gray-100
+                  hover:border-primary-500
+                  focus:border-primary-500
+                  focus:bg-white
+                  transition-all
+                  duration-300
+                  ease-in-out
+                  focus:shadow-lg
+                  focus:shadow-primary-200
+  }
+  .btn{
+    @apply
+    px-3
+    py-1
+    font-bold
+    rounded-xl
+    transition-all
+    duration-300
+
+  }
+  .btn--primary{
+    @apply
+    px-4
+    py-3
+    bg-primary-900
+    text-secondery-100
+    hover:bg-primary-800
+    shadow-lg
+    shadow-primary-300
+
+  }
+ .btn--secondary{
+  @apply 
+  bg-secondery-600
+  text-secondery-100
+ }
+ .btn--danger {
+  @apply border border-rose-700 text-rose-700;
+}
+ .badge {
+  @apply inline-block whitespace-nowrap rounded-xl px-2 py-0.5 mb-1.5;
+}
+.badge--primary {
+  @apply bg-primary-900 text-white;
+}
+.badge--secondary {
+  @apply bg-secondary-200 text-secondary-600;
+}
+.badge--success {
+  @apply bg-green-500 text-white;
+}
+.badge--danger {
+  @apply bg-red-500 text-white;
+}
+.icon{
+  @apply w-5 h-5 m-1
+}
+.icon--primary {
+  @apply text-primary-800
+}
+.icon--edit{
+  @apply text-primary-900
+}
+.icon--error{
+  @apply text-error
+}
+
+}
+
+@layer utilities {
+  .bg-secondary-200 {
+    background-color: rgb(var(--color-secondary-200));
+  }
+  .text-secondary-600{
+    color: rgb(var(--color-secondary-600));
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Vazir";
+  min-height: 100vh;
+  user-select: none;
+  background-color: rgb(var(--background-app-rgb));
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  /* border: none; */
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+button:disabled {
+  cursor: default;
+  background-color: rgb(var(--color-secondary-100), 0.5);
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* inupt number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* TABLE */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table .title-row {
+  background-color: rgb(var(--color-secondary-100));
+}
+
+table td,
+table th {
+  border-bottom: 1px solid rgb(var(--color-secondary-200));
+  text-align: right;
+  white-space: nowrap;
+}
+
+table th {
+  padding: 0.6rem 1rem;
+  color: rgb(var(--color-secondary-600));
+  font-size: 0.9rem;
+}
+
+table td {
+  font-size: 0.85rem;
+  padding: 1rem 1rem;
+  color: rgb(var(--color-secondary-600));
+}
+
+.navbar {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%); /* Initially hide the navbar */
+}
+
+.navbar.open {
+  transform: translateX(0); /* Slide in the navbar */
+}

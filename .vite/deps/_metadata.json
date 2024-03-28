@@ -1,0 +1,133 @@
+{
+  "hash": "48a8138f",
+  "configHash": "01810994",
+  "lockfileHash": "15bf2654",
+  "browserHash": "a6987b76",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "e3804a28",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "b36d45a6",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "094d82de",
+      "needsInterop": false
+    },
+    "@tanstack/react-query": {
+      "src": "../../node_modules/@tanstack/react-query/build/modern/index.js",
+      "file": "@tanstack_react-query.js",
+      "fileHash": "6e8a2092",
+      "needsInterop": false
+    },
+    "react-hot-toast": {
+      "src": "../../node_modules/react-hot-toast/dist/index.mjs",
+      "file": "react-hot-toast.js",
+      "fileHash": "a6680e3d",
+      "needsInterop": false
+    },
+    "react-icons/hi": {
+      "src": "../../node_modules/react-icons/hi/index.mjs",
+      "file": "react-icons_hi.js",
+      "fileHash": "64655def",
+      "needsInterop": false
+    },
+    "react-hook-form": {
+      "src": "../../node_modules/react-hook-form/dist/index.esm.mjs",
+      "file": "react-hook-form.js",
+      "fileHash": "1be897cc",
+      "needsInterop": false
+    },
+    "react-loader-spinner": {
+      "src": "../../node_modules/react-loader-spinner/dist/module.js",
+      "file": "react-loader-spinner.js",
+      "fileHash": "7cf353b9",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "edfde0ba",
+      "needsInterop": false
+    },
+    "react-tag-input-component": {
+      "src": "../../node_modules/react-tag-input-component/dist/esm/index.js",
+      "file": "react-tag-input-component.js",
+      "fileHash": "d2618703",
+      "needsInterop": false
+    },
+    "react-icons/tb": {
+      "src": "../../node_modules/react-icons/tb/index.mjs",
+      "file": "react-icons_tb.js",
+      "fileHash": "f1d547c4",
+      "needsInterop": false
+    },
+    "react-otp-input": {
+      "src": "../../node_modules/react-otp-input/lib/index.esm.js",
+      "file": "react-otp-input.js",
+      "fileHash": "a831d817",
+      "needsInterop": false
+    },
+    "react-icons/ci": {
+      "src": "../../node_modules/react-icons/ci/index.mjs",
+      "file": "react-icons_ci.js",
+      "fileHash": "2262ac6b",
+      "needsInterop": false
+    },
+    "react-icons/hi2": {
+      "src": "../../node_modules/react-icons/hi2/index.mjs",
+      "file": "react-icons_hi2.js",
+      "fileHash": "100f71f7",
+      "needsInterop": false
+    },
+    "react-multi-date-picker": {
+      "src": "../../node_modules/react-multi-date-picker/build/index.js",
+      "file": "react-multi-date-picker.js",
+      "fileHash": "b7e90877",
+      "needsInterop": true
+    },
+    "react-date-object/calendars/persian": {
+      "src": "../../node_modules/react-date-object/calendars/persian.js",
+      "file": "react-date-object_calendars_persian.js",
+      "fileHash": "6f40aa2b",
+      "needsInterop": true
+    },
+    "react-date-object/locales/persian_fa": {
+      "src": "../../node_modules/react-date-object/locales/persian_fa.js",
+      "file": "react-date-object_locales_persian_fa.js",
+      "fileHash": "3f3d3828",
+      "needsInterop": true
+    },
+    "@headlessui/react": {
+      "src": "../../node_modules/@headlessui/react/dist/headlessui.esm.js",
+      "file": "@headlessui_react.js",
+      "fileHash": "38404a66",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-ES3VS2V5": {
+      "file": "chunk-ES3VS2V5.js"
+    },
+    "chunk-I2625L4V": {
+      "file": "chunk-I2625L4V.js"
+    },
+    "chunk-LRCCAKWE": {
+      "file": "chunk-LRCCAKWE.js"
+    },
+    "chunk-YWBCN2AJ": {
+      "file": "chunk-YWBCN2AJ.js"
+    },
+    "chunk-7TNKEIRG": {
+      "file": "chunk-7TNKEIRG.js"
+    }
+  }
+}
