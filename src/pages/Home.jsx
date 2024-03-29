@@ -13,6 +13,9 @@ function Home() {
   const navigate = useNavigate();
 
   if (isLoading) return <Loading />;
+  if (!user) {
+    navigate("/auth");
+  }
 
   return (
     <div className="bg-secondery-0 min-h-screen">
