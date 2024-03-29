@@ -1,18 +1,16 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://hire-freelancer-app-backend.onrender.com/api";
 
 const app = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
 });
 
-
 app.interceptors.request.use(
   (res) => res,
   (err) => Promise.reject(err)
 );
-
 
 app.interceptors.response.use(
   (res) => res,
@@ -32,9 +30,6 @@ app.interceptors.response.use(
     return Promise.reject(err);
   }
 );
-
-
-
 
 const http = {
   get: app.get,
