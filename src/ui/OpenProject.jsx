@@ -2,14 +2,17 @@ import { TbBriefcase } from "react-icons/tb";
 import useProjects from "../hooks/useProjects";
 import ProjectCards from "./ProjectCards";
 import { toPersianNumbers } from "../utils/formatNumber";
-import Loading from "./Loading";
 import { HiArrowLeft } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
-function OpenProject({ user }) {
+function OpenProject() {
   const { projects, isLoading } = useProjects();
+  const naviate = useNavigate();
 
-  if (isLoading) return <Loading />;
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="xl:max-w-screen-xl space-y-4">
@@ -28,12 +31,13 @@ function OpenProject({ user }) {
       <ProjectCards smOrder="twoSm" mdOrder="threeMd" projects={projects} />
 
       <div className="flex justify-center items-center">
-        <Link to="/recomended-projects">
-          <button className="flex items-center justify-center gap-2 border border-primary-700 text-primary-700 py-2 px-3 rounded-md font-bold hover:bg-primary-700 hover:text-white transition-all duration-200 my-5">
-            <span> مشاهده همه</span>
-            <HiArrowLeft />
-          </button>
-        </Link>
+        <button
+          onClick={() => naviate("/recomended-projects")}
+          className="flex items-center justify-center gap-2 border border-primary-700 text-primary-700 py-2 px-3 rounded-md font-bold hover:bg-primary-700 hover:text-white transition-all duration-200 my-5"
+        >
+          <span> مشاهده همه</span>
+          <HiArrowLeft />
+        </button>
       </div>
     </div>
   );

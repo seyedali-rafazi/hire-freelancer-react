@@ -15,7 +15,7 @@ function CompleteProfileForm() {
   const { user } = useUser();
 
   useEffect(() => {
-    if (user) navigate("/", { replace: true });
+    if (user && user.isActive) navigate("/", { replace: true });
   }, [user, navigate]);
 
   const {
@@ -24,9 +24,6 @@ function CompleteProfileForm() {
     watch,
     formState: { errors },
   } = useForm();
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [role, setRole] = useState("");
   const { isPending, mutateAsync } = useMutation({
     mutationFn: completeProfile,
   });
@@ -42,23 +39,24 @@ function CompleteProfileForm() {
         return;
       }
       if (user.role == "OWNER") {
-        return navigate("/owner");
+        return navigate("/");
       }
       if (user.role == "FREELANCER") {
-        return navigate("/FREELANCER");
+        return navigate("/");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
   };
   return (
-    <div className="flex justify-center p-8">
+    <div className="flex min-h-screen justify-center items-center p-8">
       <div className="w-full sm:max-w-sm space-y-8">
         <h1 className="font-bold  text-4xl flex justify-center">
           تکمیل اطلاعات
         </h1>
         <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
           <TextField
+            className="textfield__input"
             label="نام و نام خانوادگی :"
             name="name"
             register={register}
@@ -68,6 +66,7 @@ function CompleteProfileForm() {
             errors={errors}
           />
           <TextField
+            className="textfield__input"
             label="ایمیل"
             name="email"
             register={register}

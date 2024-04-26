@@ -11,6 +11,8 @@ export default function useOwnerProjects() {
     queryKey: ["owner-projects", queryObject],
     queryFn: () => getOwnerProjectsApi(search),
   });
-  const { projects } = data || {};
+
+  const { projects = [] } = data ?? {}; // Use nullish coalescing operator
+  console.log(projects);
   return { projects, isLoading };
 }

@@ -10,6 +10,11 @@ function DashboardLayout() {
   if (isLoading) {
     return <Loading />;
   }
+  if (projects == null) {
+    const projects = [];
+    return projects;
+  }
+
   return (
     <div>
       <DashboardHeader />

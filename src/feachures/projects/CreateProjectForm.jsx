@@ -73,8 +73,10 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
     <div>
       <form
         className="space-y-8 bg-secondery-0"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <TextField
+          className="textfield__input"
           label="عنوان"
           name="title"
           register={register}
@@ -89,6 +91,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
           errors={errors}
         />
         <TextField
+          className="textfield__input"
           label="توضیحات"
           name="description"
           register={register}
@@ -103,6 +106,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
           errors={errors}
         />
         <TextField
+          className="textfield__input"
           label="بودجه پروژه"
           name="budget"
           type="number"

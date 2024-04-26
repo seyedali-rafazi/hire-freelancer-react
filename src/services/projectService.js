@@ -27,7 +27,7 @@ export function getprojectApi(id) {
 }
 
 export function getProjectsApi(qs) {
-  return http.get(`/project/list${qs}`).then(({ data }) => data.data);
+  return http.get(`/all-project/list${qs}`).then(({ data }) => data.data);
 }
 
 export function changeUserStatusApi({ userId, data }) {

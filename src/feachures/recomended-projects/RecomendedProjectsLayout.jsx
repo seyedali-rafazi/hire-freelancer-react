@@ -5,9 +5,12 @@ import ProjectCards from "../../ui/ProjectCards";
 import useProjects from "../../hooks/useProjects";
 import Loading from "../../ui/Loading";
 import ProjectsFilter from "../../ui/ProjectsFilter";
+import useUser from "../authentication/useUser";
+import NotUser from "./NotUser";
 
 function RecomendedProjectsLayout() {
   const { projects, isLoading } = useProjects();
+  const { user } = useUser();
 
   if (isLoading) return <Loading />;
 
@@ -15,7 +18,7 @@ function RecomendedProjectsLayout() {
     <div className="mt-6">
       <div className="grid grid-cols-1 gap-6 max-w-2lg lg:max-w-screen-xl lg:grid-cols-10">
         <div className="h-20 lg:col-span-2">
-          <SidebarPages />
+          {user ? <SidebarPages /> : <NotUser />}
         </div>
         <div className="lg:col-span-5 flex flex-col gap-4">
           <ProjectsFilter numOfProjects={projects.length} />

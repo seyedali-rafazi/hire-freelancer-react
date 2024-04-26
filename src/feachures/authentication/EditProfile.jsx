@@ -45,6 +45,7 @@ function EditProfile() {
         </h1>
         <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
           <TextField
+            className="textfield__input"
             label="نام و نام خانوادگی :"
             name="name"
             value={userInput}

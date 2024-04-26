@@ -26,6 +26,7 @@ function CreateProposal({ onClose, projectId }) {
     <div>
       <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
         <TextField
+          className="textfield__input"
           label="توضیحات"
           name="description"
           register={register}
@@ -40,6 +41,7 @@ function CreateProposal({ onClose, projectId }) {
           errors={errors}
         />
         <TextField
+          className="textfield__input"
           label="قیمت"
           name="price"
           register={register}
@@ -51,6 +53,7 @@ function CreateProposal({ onClose, projectId }) {
           errors={errors}
         />
         <TextField
+          className="textfield__input"
           label="مدت زمان"
           name="duration"
           register={register}
