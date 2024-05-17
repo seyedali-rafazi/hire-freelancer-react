@@ -13,6 +13,5 @@ export default function useOwnerProjects() {
   });
 
   const { projects = [] } = data ?? {}; // Use nullish coalescing operator
-  console.log(projects);
   return { projects, isLoading };
 }

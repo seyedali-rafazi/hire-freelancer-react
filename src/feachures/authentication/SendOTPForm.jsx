@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 function SendOTPForm() {
-  const { isCreating ,mutateAsync } = useAuth();
+  const { isCreating, mutateAsync } = useAuth();
   const navigate = useNavigate();
   const {
     register,

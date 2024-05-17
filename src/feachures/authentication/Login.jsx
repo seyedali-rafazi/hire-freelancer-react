@@ -1,7 +1,5 @@
 import React from "react";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
-import useLogout from "./useLogout";
-import Loading from "../../ui/Loading";
 import { useNavigate } from "react-router-dom";
 
 function Login() {

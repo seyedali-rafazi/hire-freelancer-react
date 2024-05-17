@@ -27,6 +27,7 @@ import { AddToFavouitProvider } from "./context/AddToFavouitContext";
 import { AuthenticationProvider } from "./context/AuthenticationContex";
 import RegisterOrder from "./pages/RegisterOrder";
 import EditProfile from "./feachures/authentication/EditProfile";
+import ScrollToTop from "./ui/ScroolToTop";
 const queryClient = new QueryClient();
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <QueryClientProvider client={queryClient}>
             <ReactQueryDevtools initialIsOpen={false} />
             <Toaster />
+            <ScrollToTop />
             <Routes>
               <Route path="/auth" element={<Auth />} />
               <Route path="/complete-profile" element={<CompleteProfile />} />
@@ -59,7 +61,8 @@ function App() {
                   <ProtectedRoute>
                     <FreelancerLauout />
                   </ProtectedRoute>
-                }>
+                }
+              >
                 <Route index element={<Navigate to="dashboard" replace />} />
                 <Route path="dashboard" element={<FreelancerDashboard />} />
                 <Route path="proposals" element={<Proposals />} />
@@ -71,7 +74,8 @@ function App() {
                   <ProtectedRoute>
                     <AdminLayout />
                   </ProtectedRoute>
-                }>
+                }
+              >
                 <Route index element={<Navigate to="dashboard" replace />} />
                 <Route path="dashboard" element={<AdminDashboard />} />
                 <Route path="users" element={<Users />} />

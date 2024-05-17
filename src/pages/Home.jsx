@@ -6,7 +6,6 @@ import OwnerHomerSection from "../feachures/owner/OwnerHomerSection";
 
 function Home() {
   const { user } = useUser();
-  console.log(user);
   if (user) {
     if (user.role == "OWNER") {
       return (
