@@ -1,5 +1,5 @@
-import http from "./httpService";
+import { mockStore } from "../mocks/mockStore";
 
 export function getCategoryApi() {
-  return http.get("/category/list").then(({ data }) => data.data);
+  return mockStore.getCategories();
 }

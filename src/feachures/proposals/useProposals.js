@@ -13,7 +13,7 @@ export default function useProposals() {
     retry: false,
   });
 
-  const { proposals } = data || {};
+  const { proposals = [] } = data || {};
 
   return { proposals, isLoading };
 }

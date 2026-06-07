@@ -15,7 +15,7 @@ const sortOptions = [
 
 function ProjectsFilter({ numOfProjects }) {
   return (
-    <div className="flex items-center justify-between border border-secondery-200 rounded-lg shadow-md p-3">
+    <div className="filter-bar">
       <span className="text-secondery-800">
         {toPersianNumbers(numOfProjects)} فرصت شغلی
       </span>

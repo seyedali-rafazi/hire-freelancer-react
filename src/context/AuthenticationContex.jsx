@@ -1,15 +1,13 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
+import useLocalStorageState from "../hooks/useLocalStorageState";
 
 const AuthenticationContex = createContext();
 
 export function AuthenticationProvider({ children }) {
-  const [phoneNumber, setphoneNumber] = useState();
-  const [password, setpassword] = useState();
-  const [step, setStep] = useState();
+  const [authView, setAuthView] = useLocalStorageState("hf_auth_view", "login");
 
   return (
-    <AuthenticationContex.Provider
-      value={{ phoneNumber, setphoneNumber, password, setpassword, setStep }}>
+    <AuthenticationContex.Provider value={{ authView, setAuthView }}>
       {children}
     </AuthenticationContex.Provider>
   );
@@ -18,6 +16,6 @@ export function AuthenticationProvider({ children }) {
 export function useAuthentication() {
   const context = useContext(AuthenticationContex);
   if (context === undefined)
-    throw new Error("ThemeContext was used outside of ThemeProvier");
+    throw new Error("useAuthentication was used outside of AuthenticationProvider");
   return context;
 }

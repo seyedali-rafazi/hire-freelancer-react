@@ -6,10 +6,11 @@ export default function useProject() {
   const { id } = useParams();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["project", id ],
+    queryKey: ["project", id],
     queryFn: () => getprojectApi(id),
     retry: false,
   });
-  const { project } = data || {};
-  return { project, isLoading };
+
+  const { project, proposals = [] } = data || {};
+  return { project, proposals, isLoading };
 }

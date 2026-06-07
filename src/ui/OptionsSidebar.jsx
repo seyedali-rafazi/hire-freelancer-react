@@ -25,10 +25,7 @@ function OptionsSidebar() {
       <FilterDropdown
         filterField="category"
         options={[
-          {
-            value: "",
-            label: " همه دسته بندی ها ",
-          },
+          { value: "ALL", label: "همه دسته‌بندی‌ها" },
           ...transformedCategories,
         ]}
       />

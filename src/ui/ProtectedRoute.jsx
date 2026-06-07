@@ -5,28 +5,36 @@ import Loading from "./Loading";
 import toast from "react-hot-toast";
 
 function ProtectedRoute({ children }) {
-  const navigate = useNavigate("/auth");
-  // 1 . load the authnictated user
+  const navigate = useNavigate();
   const { isAuthenticated, isLoading, isAuthorized, isVerified } =
     useAuthorize();
-  // 2 . check if is authorized or not , check is authnicated or not
+
   useEffect(() => {
-    if (!isAuthenticated && !isLoading) navigate("/auth");
-    if (!isVerified && !isLoading) {
+    if (isLoading) return;
+    if (!isAuthenticated) {
+      navigate("/auth");
+      return;
+    }
+    if (!isVerified) {
       toast.error("پروفایل شما در انتظار تایید است.");
       navigate("/");
+      return;
     }
-    if (!isAuthorized && !isLoading) navigate("/not-accessed");
+    if (!isAuthorized) {
+      toast.error("شما به این بخش دسترسی ندارید.");
+      navigate("/");
+    }
   }, [isAuthenticated, isAuthorized, isLoading, navigate, isVerified]);
-  // 3 . while loading => show loading
-  if (isLoading)
+
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen bg-secondery-100">
         <Loading />
       </div>
     );
-  // 4 . if user isAuthenticated and isAuthorized => render the app
-  if (isAuthenticated && isAuthorized) return children;
+  }
+
+  if (isAuthenticated && isAuthorized && isVerified) return children;
 }
 
 export default ProtectedRoute;

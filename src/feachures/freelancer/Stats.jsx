@@ -1,4 +1,3 @@
-import React from "react";
 import {
   HiCollection,
   HiCurrencyDollar,
@@ -7,29 +6,34 @@ import {
 import Stat from "../../ui/Stat";
 import { toPersianNumbersWithComma } from "../../utils/formatNumber";
 
-function Stats({ proposals }) {
-  const numOfPropsals = proposals?.length;
+function Stats({ proposals = [] }) {
+  const numOfProposals = proposals.length;
   const acceptedProposals = proposals.filter((p) => p.status === 2);
-  const balance = acceptedProposals.reduce((acc, cur) => cur.price + acc, 0);
+  const pendingProposals = proposals.filter((p) => p.status === 1).length;
+  const balance = acceptedProposals.reduce((acc, cur) => acc + (cur.price || 0), 0);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-x-8 gap-y-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       <Stat
         color="primary"
-        title="درخواست ها"
-        value={numOfPropsals}
-        icon={<HiOutlineViewGrid className="w-20 h-20" />}
+        title="درخواست‌های ارسالی"
+        value={numOfProposals}
+        subtitle={`${pendingProposals} در انتظار پاسخ`}
+        icon={<HiOutlineViewGrid className="w-8 h-8" />}
       />
       <Stat
         color="green"
-        title="درخواست های تایید شده"
+        title="درخواست‌های تایید شده"
         value={acceptedProposals.length}
-        icon={<HiCurrencyDollar className="w-20 h-20" />}
+        subtitle="پروژه‌های پذیرفته شده"
+        icon={<HiCurrencyDollar className="w-8 h-8" />}
       />
       <Stat
         color="yellow"
-        title=" کیف پول"
+        title="درآمد تخمینی"
         value={toPersianNumbersWithComma(balance)}
-        icon={<HiCollection className="w-20 h-20" />}
+        subtitle="تومان از پروژه‌های تایید شده"
+        icon={<HiCollection className="w-8 h-8" />}
       />
     </div>
   );

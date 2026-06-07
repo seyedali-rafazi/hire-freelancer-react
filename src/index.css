@@ -36,7 +36,7 @@
       --color-red-300: 252, 165, 165;
     }
     .dark-mode {
-      --background-app-rgb: 255, 255, 255;
+      --background-app-rgb: 17, 24, 39;
       --color-primary-900: 74, 109, 255;
       --color-primary-800: 92, 124, 255;
       --color-primary-700: 110, 138, 255;
@@ -75,7 +75,8 @@
                   border-gray-100
                   hover:border-primary-500
                   focus:border-primary-500
-                  focus:bg-white
+                  focus:bg-secondery-0
+                  bg-secondery-0
                   transition-all
                   duration-300
                   ease-in-out
@@ -99,9 +100,19 @@
     bg-primary-900
     text-secondery-100
     hover:bg-primary-800
-    shadow-lg
-    shadow-primary-300
-
+    active:scale-[0.98];
+    box-shadow: 0 4px 14px rgba(74, 109, 255, 0.25);
+  }
+  .btn--primary:hover {
+    box-shadow: 0 6px 20px rgba(74, 109, 255, 0.35);
+  }
+  .btn-action {
+    @apply flex items-center justify-center gap-2 bg-primary-800 text-white font-bold rounded-xl transition-all duration-300;
+    box-shadow: 0 4px 12px rgba(74, 109, 255, 0.2);
+  }
+  .btn-action:hover {
+    @apply bg-primary-700;
+    box-shadow: 0 6px 16px rgba(74, 109, 255, 0.3);
   }
  .btn--secondary{
   @apply 
@@ -231,3 +242,260 @@ table td {
 .navbar.open {
   transform: translateX(0); /* Slide in the navbar */
 }
+
+/* ── Demo Auth & UI Enhancements ── */
+
+.auth-page-bg {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(74, 109, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    rgb(var(--background-app-rgb));
+}
+
+.hero-section {
+  background:
+    linear-gradient(180deg, rgba(74, 109, 255, 0.06) 0%, transparent 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, rgb(var(--color-primary-900)), rgb(var(--color-primary-600)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(74, 109, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(74, 109, 255, 0.1);
+}
+
+.dark-mode .glass-card {
+  background: rgba(24, 33, 47, 0.9);
+  border-color: rgba(74, 109, 255, 0.2);
+}
+
+.search-bar-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(74, 109, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(74, 109, 255, 0.08);
+}
+
+.project-card {
+  @apply flex flex-col border border-secondery-200 rounded-2xl p-5 bg-secondery-0;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(74, 109, 255, 0.15);
+  border-color: rgba(74, 109, 255, 0.3);
+}
+
+.dark-mode .project-card {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .project-card:hover {
+  box-shadow: 0 12px 32px rgba(74, 109, 255, 0.2);
+}
+
+.modal-overlay {
+  @apply fixed inset-0 z-[9999] flex items-center justify-center p-4;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  overscroll-behavior: contain;
+}
+
+.modal-content {
+  @apply w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-secondery-0 p-6 shadow-2xl;
+  animation: modalIn 0.25s ease-out;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.account-dropdown {
+  @apply bg-secondery-0 shadow-xl rounded-xl border border-secondery-200;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.account-dropdown-btn {
+  @apply flex w-full px-4 gap-3 items-center text-secondery-800 py-3 rounded-lg transition-all duration-200;
+}
+
+.account-dropdown-btn:hover {
+  @apply bg-primary-800 text-white;
+}
+
+.dark-mode .search-bar-glass {
+  background: rgba(24, 33, 47, 0.85);
+  border-color: rgba(74, 109, 255, 0.2);
+}
+
+.dark-mode .glass-card {
+  background: rgba(24, 33, 47, 0.92);
+}
+
+.proposal-card {
+  @apply mb-6 border border-secondery-200 rounded-xl p-5 bg-secondery-0;
+}
+
+.filter-bar {
+  @apply flex items-center justify-between border border-secondery-200 rounded-xl p-3 bg-secondery-0;
+}
+
+/* ── Dashboard & Profile ── */
+
+.dashboard-header {
+  @apply mb-6 pb-6 border-b border-secondery-200;
+}
+
+.stat-card {
+  @apply flex items-center gap-4 bg-secondery-0 border border-secondery-200 rounded-2xl p-5;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(74, 109, 255, 0.12);
+  border-color: rgba(74, 109, 255, 0.25);
+}
+
+.stat-card-icon {
+  @apply flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover .stat-card-icon {
+  transform: scale(1.08);
+}
+
+.quick-action-card {
+  @apply flex items-center gap-3 p-4 rounded-xl border border-secondery-200 bg-secondery-0 transition-all duration-300;
+}
+
+.quick-action-card:hover {
+  @apply bg-primary-800 border-primary-800;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74, 109, 255, 0.25);
+}
+
+.profile-card {
+  @apply bg-secondery-0 border border-secondery-200 rounded-2xl p-6 md:p-8;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .stat-card,
+.dark-mode .quick-action-card,
+.dark-mode .profile-card {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Dark mode: replace light/white button shadows */
+.dark-mode .btn--primary {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+.dark-mode .btn--primary:hover {
+  box-shadow: 0 6px 18px rgba(74, 109, 255, 0.2);
+}
+.dark-mode .btn-action {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.dark-mode .btn-action:hover {
+  box-shadow: 0 6px 16px rgba(74, 109, 255, 0.18);
+}
+.dark-mode .textfield__input:focus {
+  box-shadow: 0 0 0 3px rgba(74, 109, 255, 0.15) !important;
+}
+.dark-mode .role-btn {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+.dark-mode .role-btn:hover:not(:disabled) {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.dark-mode .quick-action-card:hover {
+  box-shadow: 0 6px 18px rgba(74, 109, 255, 0.15);
+}
+.dark-mode .stat-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+.dark-mode .badge-closed {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: rgb(252, 165, 165);
+}
+
+.role-btn {
+  @apply flex flex-col items-center justify-center p-6 rounded-2xl text-center;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px;
+}
+
+.role-btn:hover:not(:disabled) {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 40px;
+}
+
+.role-btn:active:not(:disabled) {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.btn-signup {
+  @apply font-bold text-primary-800 border-2 border-primary-300 px-6 py-3 rounded-xl;
+  transition: all 0.3s ease;
+}
+
+.btn-signup:hover {
+  @apply bg-primary-800 text-white border-primary-800;
+  transform: scale(1.03);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }

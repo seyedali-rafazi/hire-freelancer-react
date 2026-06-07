@@ -11,6 +11,6 @@ export default function useProjects() {
     queryKey: ["projects", queryObject],
     queryFn: () => getProjectsApi(search),
   });
-  const { projects } = data || {};
+  const { projects = [] } = data || {};
   return { projects, isLoading };
 }

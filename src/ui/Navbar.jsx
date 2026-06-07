@@ -26,7 +26,7 @@ function Navbar({ open, onClose, children }) {
   ${open ? "open" : ""}`}>
         <div
           ref={modalRef}
-          className="bg-white h-screen w-full">
+          className="bg-secondery-0 h-screen w-full">
           <div className="flex justify-end p-5 bg-secondery-0 ">
             <button onClick={onClose}>
               <HiOutlineX className="w-6 h-6 text-secondery-900" />

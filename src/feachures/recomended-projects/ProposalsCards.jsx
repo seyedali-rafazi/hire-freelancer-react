@@ -26,9 +26,7 @@ function ProposalsCards({ proposals }) {
   return (
     <div>
       {proposals.map((proposal) => (
-        <div
-          key={proposal._id}
-          className="mb-10 border border-secondery-200 rounded-lg p-5 ">
+        <div key={proposal._id} className="proposal-card">
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-2">

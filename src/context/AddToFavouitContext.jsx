@@ -4,11 +4,7 @@ import useLocalStorageState from "../hooks/useLocalStorageState";
 const AddToFavouitContext = createContext();
 
 export function AddToFavouitProvider({ children }) {
-  const [myFavourits, setMyFavourit] = useLocalStorageState(`FAVOURITS`);
-
-  if(myFavourits === undefined){
-    setMyFavourit([])
-  }
+  const [myFavourits, setMyFavourit] = useLocalStorageState("FAVOURITS", []);
 
   const handelMyFavourits = (proj) => {
     setMyFavourit((preFav) => [...preFav, proj]);

@@ -1,16 +1,19 @@
-import React from "react";
 import useProject from "../feachures/project/useProject";
 import Loading from "../ui/Loading";
 import ProjectHeader from "../feachures/project/ProjectHeader";
 import ProposalsTable from "../feachures/project/ProposalsTable";
+import Empty from "../ui/Empty";
 
 function Project() {
-  const { isLoading, project } = useProject();
+  const { isLoading, project, proposals } = useProject();
+
   if (isLoading) return <Loading />;
+  if (!project) return <Empty resourceName="پروژه" />;
+
   return (
-    <div>
+    <div className="space-y-6 animate-fade-in-up">
       <ProjectHeader project={project} />
-      <ProposalsTable proposals={project.proposals} />
+      <ProposalsTable proposals={proposals} />
     </div>
   );
 }

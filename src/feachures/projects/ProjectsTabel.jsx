@@ -21,8 +21,8 @@ function ProjectsTabel() {
   if (!projects.length) {
     return (
       <div>
-        <Empty resourceName="هیچ پروژه ای یافت نشد" />
         <ProjectHeader />
+        <Empty resourceName="هیچ پروژه‌ای یافت نشد" />
       </div>
     );
   }

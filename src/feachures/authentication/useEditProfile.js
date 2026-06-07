@@ -15,7 +15,7 @@ export default function useEditProfile() {
       });
     },
     onError: (err) => {
-      toast.error(err?.response?.data?.message);
+      toast.error(err?.message || err?.response?.data?.message);
     },
   });
   return { isPending, editProfile };

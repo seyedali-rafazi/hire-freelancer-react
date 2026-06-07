@@ -1,4 +1,3 @@
-import React from "react";
 import {
   HiCollection,
   HiCurrencyDollar,
@@ -6,33 +5,37 @@ import {
 } from "react-icons/hi";
 import Stat from "../../ui/Stat";
 
-function Stats({ projects }) {
+function Stats({ projects = [], proposals = [] }) {
   const numOfProjects = projects.length;
-  const numOfAcceptedProjects = projects.filter((p) => p.status === 2).length;
-  const numOfProposal = projects.reduce(
-    (acc, cur) => cur.proposals.length + acc,
-    0
-  );
+  const numOfClosedProjects = projects.filter(
+    (p) => p.status === "CLOSED"
+  ).length;
+  const numOfOpenProjects = projects.filter((p) => p.status === "OPEN").length;
+  const numOfProposals = proposals.length;
+  const pendingProposals = proposals.filter((p) => p.status === 1).length;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-x-8 gap-y-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       <Stat
         color="primary"
-        title="پروژه ها"
+        title="کل پروژه‌ها"
         value={numOfProjects}
-        icon={<HiOutlineViewGrid className="w-20 h-20" />}
+        subtitle={`${numOfOpenProjects} پروژه فعال`}
+        icon={<HiOutlineViewGrid className="w-8 h-8" />}
       />
       <Stat
         color="green"
-        title="پروژه های واگذار شده"
-        value={numOfAcceptedProjects}
-        icon={<HiCurrencyDollar className="w-20 h-20" />}
+        title="پروژه‌های واگذار شده"
+        value={numOfClosedProjects}
+        subtitle="پروژه‌های بسته شده"
+        icon={<HiCurrencyDollar className="w-8 h-8" />}
       />
       <Stat
         color="yellow"
-        title="درخواست ها"
-        value={numOfProposal}
-        icon={<HiCollection className="w-20 h-20" />}
+        title="درخواست‌های دریافتی"
+        value={numOfProposals}
+        subtitle={`${pendingProposals} در انتظار بررسی`}
+        icon={<HiCollection className="w-8 h-8" />}
       />
     </div>
   );

@@ -1,24 +1,51 @@
-import React from "react";
 import { toPersianNumbers } from "../utils/formatNumber";
 
-const colors = {
-  primary: "bg-primary-100 text-primary-700",
-  green: "bg-green-100 text-green-700",
-  yellow: "bg-blue-100 text-blue-700",
+const colorMap = {
+  primary: {
+    bg: "bg-primary-100",
+    text: "text-primary-700",
+    ring: "ring-primary-200",
+    gradient: "from-primary-600 to-primary-800",
+  },
+  green: {
+    bg: "bg-emerald-100",
+    text: "text-emerald-700",
+    ring: "ring-emerald-200",
+    gradient: "from-emerald-500 to-teal-600",
+  },
+  yellow: {
+    bg: "bg-amber-100",
+    text: "text-amber-700",
+    ring: "ring-amber-200",
+    gradient: "from-amber-500 to-orange-500",
+  },
+  violet: {
+    bg: "bg-violet-100",
+    text: "text-violet-700",
+    ring: "ring-violet-200",
+    gradient: "from-violet-500 to-purple-600",
+  },
 };
-function Stat({ icon, value, title, color }) {
+
+function Stat({ icon, value, title, subtitle, color = "primary" }) {
+  const c = colorMap[color] || colorMap.primary;
+
   return (
-    <div className="col-span-1 grid grid-rows-2 grid-cols-[6.4rem_1fr] bg-secondery-0 p-4 rounded-lg gap-x-4 ">
+    <div className="stat-card group">
       <div
-        className={`row-span-2 flex justify-center items-center p-2 aspect-square rounded-full ${colors[color]}`}>
+        className={`stat-card-icon bg-gradient-to-br ${c.gradient} text-white shadow-lg`}
+      >
         {icon}
       </div>
-      <h5 className="font-bold text-secondery-500 text-lg - self-center">
-        {title}
-      </h5>
-      <p className="text-3xl font-bold text-secondery-900">
-        {toPersianNumbers(value)}
-      </p>
+      <div className="flex flex-col justify-center min-w-0">
+        <h5 className="font-bold text-secondery-500 text-sm">{title}</h5>
+        <p className="text-2xl md:text-3xl font-black text-secondery-900 truncate">
+          {typeof value === "number" ? toPersianNumbers(value) : value}
+        </p>
+        {subtitle && (
+          <p className="text-xs text-secondery-400 mt-1">{subtitle}</p>
+        )}
+      </div>
     </div>
   );
 }

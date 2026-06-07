@@ -1,37 +1,37 @@
-import http from "./httpService";
+import { mockStore } from "../mocks/mockStore";
 
 export function getOwnerProjectsApi(qs) {
-  return http.get(`/project/owner-projects${qs}`).then(({ data }) => data.data);
+  return mockStore.getOwnerProjects(qs);
 }
 
 export function removeProjectApi(id) {
-  return http.delete(`/project/${id}`).then(({ data }) => data.data);
+  return mockStore.removeProject(id);
 }
 
 export function createProjectApi(data) {
-  return http.post(`/project/add`, data).then(({ data }) => data.data);
+  return mockStore.createProject(data);
 }
 
 export function editProjectApi({ id, newProject }) {
-  return http
-    .patch(`/project/update/${id}`, newProject)
-    .then(({ data }) => data.data);
+  return mockStore.editProject({ id, newProject });
 }
 
 export function toggelProjectStatusApi({ id, data }) {
-  return http.patch(`/project/${id}`, data).then(({ data }) => data.data);
+  return mockStore.toggleProjectStatus({ id, data });
 }
 
 export function getprojectApi(id) {
-  return http.get(`/project/${id}`).then(({ data }) => data.data);
+  return mockStore.getProject(id);
 }
 
 export function getProjectsApi(qs) {
-  return http.get(`/all-project/list${qs}`).then(({ data }) => data.data);
+  return mockStore.getProjects(qs);
+}
+
+export function getAllProjectsApi() {
+  return mockStore.getAllProjects();
 }
 
 export function changeUserStatusApi({ userId, data }) {
-  return http
-    .patch(`/admin/user/verify/${userId}`, data)
-    .then(({ data }) => data.data);
+  return mockStore.changeUserStatus({ userId, data });
 }

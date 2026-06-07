@@ -1,15 +1,13 @@
-import http from "./httpService";
+import { mockStore } from "../mocks/mockStore";
 
-export function changeProposalStatusApi({ proposalId, ...reset }) {
-  return http
-    .patch(`/proposal/${proposalId}`, reset)
-    .then(({ data }) => data.data);
+export function changeProposalStatusApi({ proposalId, ...rest }) {
+  return mockStore.changeProposalStatus({ proposalId, ...rest });
 }
 
 export function getProposalsApi(qs) {
-  return http.get(`/proposal/list${qs}`).then(({ data }) => data.data);
+  return mockStore.getProposals(qs);
 }
 
 export function createProposalApi(data) {
-  return http.post(`/proposal/add`, data).then(({ data }) => data.data);
+  return mockStore.createProposal(data);
 }

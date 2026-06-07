@@ -1,29 +1,18 @@
-import React from "react";
 import Table from "../../../ui/Table";
 import Loading from "../../../ui/Loading";
 import Empty from "../../../ui/Empty";
 import useProjects from "../../../hooks/useProjects";
 import ProjectRow from "./ProjectRow";
-import ProjectHeader from "../../projects/ProjectHeader";
 
 export default function ProjectsTable() {
-  const { isLoading, projects } = useProjects();
-  if (isLoading) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
-  }
+  const { isLoading, projects = [] } = useProjects();
+
+  if (isLoading) return <Loading />;
 
   if (!projects.length) {
-    return (
-      <div>
-        <Empty resourceName="هیچ پروژه ای یافت نشد" />
-        <ProjectHeader />
-      </div>
-    );
+    return <Empty resourceName="هیچ پروژه‌ای یافت نشد" />;
   }
+
   return (
     <Table>
       <Table.Header>

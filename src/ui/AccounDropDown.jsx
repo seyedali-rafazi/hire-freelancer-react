@@ -1,125 +1,103 @@
-import React from "react";
 import { HiOutlinePencil } from "react-icons/hi";
 import Logout from "../feachures/authentication/Logout";
 import useOutsideClick from "../hooks/useOutsideClick";
-import { TbPaperclip, TbHome, TbReportSearch } from "react-icons/tb";
-import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { TbPaperclip, TbHome, TbReportSearch, TbLayoutDashboard } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+
+const ROLE_LABELS = {
+  USER: "کاربر",
+  ADMIN: "ادمین",
+  FREELANCER: "فریلنسر",
+  OWNER: "کارفرما",
+};
+
+const MENU_BY_ROLE = {
+  FREELANCER: [
+    { path: "/freelancer/dashboard", icon: TbLayoutDashboard, text: "داشبورد فریلنسر" },
+    { path: "/sended-proposals", icon: TbReportSearch, text: "درخواست‌های ارسالی" },
+    { path: "/recomended-projects", icon: TbPaperclip, text: "پروژه‌های موجود" },
+    { path: "/favourit-projects", icon: TbHome, text: "علاقه‌مندی‌ها" },
+  ],
+  OWNER: [
+    { path: "/owner/dashboard", icon: TbLayoutDashboard, text: "داشبورد کارفرما" },
+    { path: "/owner/projects", icon: TbReportSearch, text: "پروژه‌های من" },
+    { path: "/order-project", icon: TbPaperclip, text: "ثبت پروژه جدید" },
+  ],
+  ADMIN: [
+    { path: "/admin/dashboard", icon: TbLayoutDashboard, text: "پنل ادمین" },
+    { path: "/admin/users", icon: TbReportSearch, text: "مدیریت کاربران" },
+    { path: "/admin/projects", icon: TbPaperclip, text: "همه پروژه‌ها" },
+  ],
+  USER: [
+    { path: "/recomended-projects", icon: TbPaperclip, text: "پروژه‌های موجود" },
+    { path: "/favourit-projects", icon: TbHome, text: "علاقه‌مندی‌ها" },
+  ],
+};
 
 function AccounDropDown({ open, onClose, user }) {
   const modalRef = useOutsideClick(onClose);
   const navigate = useNavigate();
 
-  let userRole;
-  let accountPath;
-  let proposalPath;
-  let projectsPage;
-  switch (user.role) {
-    case "USER":
-      userRole = "کاربر";
-      accountPath = "/";
-      proposalPath = "/";
-      projectsPage = "/recomended-projects";
-      break;
-    case "ADMIN":
-      userRole = "ادمین";
-      accountPath = "/admin";
-      proposalPath = "freelancer/proposals";
-      projectsPage = "/recomended-projects";
-      break;
-    case "FREELANCER":
-      userRole = "کارجو";
-      accountPath = "/freelancer";
-      proposalPath = "/freelancer/proposals";
-      projectsPage = "/recomended-projects";
-      break;
-    case "OWNER":
-      userRole = "کارفرما";
-      accountPath = "/owner";
-      proposalPath = "/owner/projects";
-      projectsPage = "/order-project";
-      break;
-    default:
-      userRole = "نامشخص";
-      accountPath = "/";
-      proposalPath = "/";
-      projectsPage = "/recomended-projects";
-      break;
-  }
+  const menuItems = MENU_BY_ROLE[user.role] || MENU_BY_ROLE.USER;
 
-  const handelClick = () => {
-    if ((user.role = "USER" && user.status == 1)) {
-      toast.error("اکانت شما هنوز فعال نشده است از صبر شما ممنون هستیم");
-    }
+  const handleNavigate = (path) => {
+    onClose();
+    navigate(path);
   };
 
-  const handelClickEdit = () => {
+  const handleEditProfile = () => {
+    onClose();
     navigate("/edit-profile");
   };
 
+  if (!open) return null;
+
   return (
-    open && (
-      <div className="fixed top-0 left-0 w-full h-screen  bg-opacity-30 z-50">
-        <ul
-          className="left-4 top-16 bg-secondery-0 py-2 px-2 z-1200 fixed flex flex-col gap-3 shadow-md
-        shadow-primary-700 rounded-md w-64 transition-all duration-300 ease-in-out "
-          ref={modalRef}>
-          <li className="flex px-4  gap-3 items-center ">
-            <img
-              className="w-10 h-10 rounded-full object-cover object-center"
-              src="/user.jpg"
-              alt="عکس کاربر"
-            />
-            <div>
-              <p className="font-bold text-secondery-900"> {user.name}</p>
-              <div className="flex  justify-start items-center gap-1">
-                <span className="text-sm text-secondery-900">{userRole} </span>
-                <button onClick={handelClickEdit}>
-                  <HiOutlinePencil className="icon w-5 h-5 text-secondery-900" />
-                </button>
-              </div>
+    <div className="fixed inset-0 z-50">
+      <ul
+        ref={modalRef}
+        className="account-dropdown left-4 top-16 py-2 px-2 fixed flex flex-col gap-1 w-64"
+      >
+        <li className="flex px-4 gap-3 items-center py-2">
+          <img
+            className="w-10 h-10 rounded-full object-cover"
+            src="/user.jpg"
+            alt="عکس کاربر"
+          />
+          <div>
+            <p className="font-bold text-secondery-900">{user.name}</p>
+            <div className="flex items-center gap-1">
+              <span className="text-sm text-secondery-500">
+                {ROLE_LABELS[user.role] || "کاربر"}
+              </span>
+              <button onClick={handleEditProfile} aria-label="ویرایش پروفایل">
+                <HiOutlinePencil className="w-4 h-4 text-secondery-500 hover:text-primary-700" />
+              </button>
             </div>
+          </div>
+        </li>
+
+        <li className="mx-2 border-t border-secondery-200" />
+
+        {menuItems.map((item) => (
+          <li key={item.path}>
+            <button
+              onClick={() => handleNavigate(item.path)}
+              className="account-dropdown-btn"
+            >
+              <item.icon className="w-5 h-5" />
+              <span>{item.text}</span>
+            </button>
           </li>
-          <span className="w-full bg-primary-100 h-0.5"></span>
+        ))}
 
-          <DropDownButton
-            path={accountPath}
-            onClick={handelClick}
-            icon={<TbHome className="w-6 h-6" />}
-            text="حساب کاربری"
-          />
-          <DropDownButton
-            path={proposalPath}
-            onClick={handelClick}
-            icon={<TbReportSearch className="w-6 h-6" />}
-            text="درخواست های شما "
-          />
-          <DropDownButton
-            path={projectsPage}
-            icon={<TbPaperclip className="w-6 h-6" />}
-            text="پروژه های موجود"
-          />
-
+        <li className="mx-2 border-t border-secondery-200 mt-1" />
+        <li>
           <Logout />
-        </ul>
-      </div>
-    )
+        </li>
+      </ul>
+    </div>
   );
 }
 
 export default AccounDropDown;
-
-function DropDownButton({ path, onClick, icon, text }) {
-  return (
-    <Link to={path}>
-      <button
-        onClick={onClick}
-        className={`flex w-full px-4  gap-3 items-center hover:text-white
-          hover:bg-primary-700 py-3 rounded-lg transition-all duration-300 text-secondery-900
-          `}>
-        {icon}
-        <span>{text} </span>
-      </button>
-    </Link>
-  );
-}

@@ -6,21 +6,32 @@ import { truncateText } from "../../../utils/truncateText";
 import { MdAssignment } from "react-icons/md";
 import Modal from "../../../ui/Modal";
 import CreateProposal from "./CreateProposal";
+import useUser from "../../authentication/useUser";
+import toast from "react-hot-toast";
 
 const projectStatus = {
-  OPEN: {
-    label: "باز",
-    className: "badge--success",
-  },
-  CLOSED: {
-    label: "بسته",
-    className: "badge--danger",
-  },
+  OPEN: { label: "باز", className: "badge--success" },
+  CLOSED: { label: "بسته", className: "badge--danger" },
 };
 
 function ProjectRow({ project, index }) {
   const { status, title, budget, deadline } = project;
   const [open, setOpen] = useState(false);
+  const { user } = useUser();
+  const isOpen = status === "OPEN";
+
+  const handleProposal = () => {
+    if (!isOpen) {
+      toast.error("این پروژه بسته شده و امکان ارسال درخواست وجود ندارد");
+      return;
+    }
+    if (!user || user.role !== "FREELANCER") {
+      toast.error("فقط فریلنسرها می‌توانند درخواست ارسال کنند");
+      return;
+    }
+    setOpen(true);
+  };
+
   return (
     <Table.Row>
       <td>{index + 1}</td>
@@ -28,7 +39,7 @@ function ProjectRow({ project, index }) {
       <td>{toPersianNumbersWithComma(budget)}</td>
       <td>{toLocalDateShort(deadline)}</td>
       <td>
-        <span className={`badge ${projectStatus[status].className} `}>
+        <span className={`badge ${projectStatus[status].className}`}>
           {projectStatus[status].label}
         </span>
       </td>
@@ -36,13 +47,19 @@ function ProjectRow({ project, index }) {
         <Modal
           open={open}
           onClose={() => setOpen(false)}
-          title={`درخواست انجام پروژه ${title}`}>
+          title={`درخواست انجام پروژه ${title}`}
+        >
           <CreateProposal
             projectId={project._id}
             onClose={() => setOpen(false)}
           />
         </Modal>
-        <button onClick={() => setOpen(true)}>
+        <button
+          onClick={handleProposal}
+          disabled={!isOpen}
+          className={!isOpen ? "opacity-40 cursor-not-allowed" : ""}
+          title={isOpen ? "ارسال درخواست" : "پروژه بسته شده"}
+        >
           <MdAssignment className="icon icon--primary" />
         </button>
       </td>

@@ -1,12 +1,12 @@
-import React from "react";
 import Empty from "../../ui/Empty";
 import Table from "../../ui/Table";
 import ProposalRow from "./proposalRow";
 
-function ProposalsTable({ proposals }) {
-  if (!proposals.length) return <Empty resourceName="درخواستی" />;
+function ProposalsTable({ proposals = [] }) {
+  if (!proposals?.length) return <Empty resourceName="درخواستی" />;
+
   return (
-    <div>
+    <div className="proposal-card !mb-0">
       <Table>
         <Table.Header>
           <th>#</th>
