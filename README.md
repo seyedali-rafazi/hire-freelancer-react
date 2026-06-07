@@ -2,7 +2,7 @@
 
 A Persian (RTL) freelance marketplace frontend built with React and TypeScript. The app connects **employers (کارفرما)**, **freelancers (فریلنسر)**, and **admins** through project listings, proposals, and role-based dashboards.
 
-**Live demo:** [https://takhasossazan.liara.run/](https://takhasossazan.liara.run/)
+**Live demo:** [https://hire-freelancer-react.vercel.app/](https://hire-freelancer-react.vercel.app/)
 
 ---
 
