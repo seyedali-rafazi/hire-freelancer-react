@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import TextField from "../../ui/TextField";
-import RadioInput from "../../ui/RadioInput";
 import { useMutation } from "@tanstack/react-query";
 import { completeProfile } from "../../services/authService";
 import Loading from "../../ui/Loading";
@@ -25,7 +24,7 @@ function CompleteProfileForm() {
     watch,
     formState: { errors },
   } = useForm();
-  const { isLoading, mutateAsync } = useMutation({
+  const { isPending: isLoading, mutateAsync } = useMutation({
     mutationFn: completeProfile,
   });
 

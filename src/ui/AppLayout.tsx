@@ -1,13 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import SideBar from "./SideBar";
 
 function AppLayout({ children }) {
   return (
     <div className="flex flex-col">
       <div>
-        <Header children={children} />
+        <Header>{children}</Header>
       </div>
       <div className="flex min-h-screen ">
         <div className="w-1/5 hidden lg:block">{children}</div>

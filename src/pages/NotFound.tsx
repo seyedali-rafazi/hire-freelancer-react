@@ -1,22 +1,31 @@
-import React from "react";
 import { HiArrowRight } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import useMoveBack from "../hooks/useMoveBack";
 
 function NotFound() {
   const moveBack = useMoveBack();
+
   return (
-    <div className="container xl:max-w-screen-xl">
-      <div className="flex justify-center">
-        <div className="sm:max-w-sm  pt-10">
-          <div className="space-y-4">
-            <h1 className=" font-bold text-xl">
-              صفحه ای که به دنبالش بودید، یافت نشد .
-            </h1>
-            <button onClick={moveBack} className="flex items-center gap-x-2">
-              <HiArrowRight />
-              <span>برگشت</span>
-            </button>
-          </div>
+    <div className="container mx-auto px-4 py-24">
+      <div className="mx-auto max-w-md text-center">
+        <p className="text-6xl font-black text-primary-200">۴۰۴</p>
+        <h1 className="mt-4 text-xl font-bold text-secondery-900">
+          صفحه‌ای که به دنبالش بودید، یافت نشد.
+        </h1>
+        <p className="mt-2 text-secondery-500">
+          ممکن است آدرس اشتباه باشد یا صفحه حذف شده باشد.
+        </p>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <button
+            onClick={moveBack}
+            className="btn btn--secondary flex items-center gap-x-2"
+          >
+            <HiArrowRight />
+            <span>برگشت</span>
+          </button>
+          <Link to="/" className="btn btn--primary">
+            صفحه اصلی
+          </Link>
         </div>
       </div>
     </div>

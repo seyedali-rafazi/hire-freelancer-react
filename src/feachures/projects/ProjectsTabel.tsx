@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import useOwnerProjects from "./useOwnerProjects";
 import Loading from "../../ui/Loading";
 import Table from "../../ui/Table";
 import ProjectRow from "./ProjectRow";
-import { HiPlus } from "react-icons/hi";
-import Modal from "../../ui/Modal";
-import CreateProjectForm from "./CreateProjectForm";
 import ProjectHeader from "./ProjectHeader";
 import Empty from "../../ui/Empty";
 function ProjectsTabel() {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TextField from "../../ui/TextField";
 import Loading from "../../ui/Loading";
 import { useForm } from "react-hook-form";
@@ -13,7 +13,6 @@ function SendOTPForm() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
   const onCkickSubmit = async (data) => {

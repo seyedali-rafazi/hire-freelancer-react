@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -15,7 +15,8 @@
     "@headlessui/react": "^1.7.18",
     "@mui/material": "^5.15.13",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "@tanstack/react-query-devtools": "^4.36.1",
+    "@tanstack/react-query": "^5.101.0",
+    "@tanstack/react-query-devtools": "^5.101.0",
     "axios": "^1.6.7",
     "query-string": "^9.0.0",
     "react": "^18.2.0",
@@ -31,20 +32,26 @@
     "react-tag-input-component": "^2.0.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.4",
     "@tailwindcss/forms": "^0.5.7",
     "@types/node": "^25.9.2",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.18",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "globals": "^17.6.0",
+    "jiti": "^2.7.0",
     "postcss": "^8.4.35",
+    "postcss-load-config": "^6.0.1",
     "postcss-nesting": "^12.0.4",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1",
     "vite": "^5.1.4"
   }
 }

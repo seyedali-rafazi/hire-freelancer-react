@@ -6,7 +6,7 @@ import { getErrorMessage } from "../../../utils/getErrorMessage";
 export default function useUserStatus() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isUpdating, mutate: changeUserStatus } = useMutation({
+  const { isPending: isUpdating, mutate: changeUserStatus } = useMutation({
     mutationFn: changeUserStatusApi,
     onSuccess: (data) => {
       toast.success(data.message);

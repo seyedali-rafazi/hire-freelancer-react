@@ -6,7 +6,7 @@ import { getErrorMessage } from "../../../utils/getErrorMessage";
 export default function useCreateProposal() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isCreating, mutate: createProposal } = useMutation({
+  const { isPending: isCreating, mutate: createProposal } = useMutation({
     mutationFn: createProposalApi,
     onSuccess: (data) => {
       toast.success(data.message);

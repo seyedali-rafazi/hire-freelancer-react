@@ -17,7 +17,7 @@ function CreateProposal({ onClose, projectId }) {
     createProposal(newProposal, {
       onSuccess: () => {
         onClose();
-        reset;
+        reset();
       },
     });
   };

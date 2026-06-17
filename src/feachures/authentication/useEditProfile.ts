@@ -6,7 +6,7 @@ import { getErrorMessage } from "../../utils/getErrorMessage";
 export default function useEditProfile() {
   const queryClient = useQueryClient();
 
-  const { isLoading, mutate: editProfile } = useMutation({
+  const { isPending: isLoading, mutate: editProfile } = useMutation({
     mutationFn: editProfileApi,
     onSuccess: (data) => {
       toast.success(data.message);

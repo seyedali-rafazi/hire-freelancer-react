@@ -6,7 +6,7 @@ import { getErrorMessage } from "../../utils/getErrorMessage";
 export default function useLogin() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isLoggingIn, mutate: loginAs } = useMutation({
+  const { isPending: isLoggingIn, mutate: loginAs } = useMutation({
     mutationFn: loginAsApi,
     onSuccess: (data) => {
       toast.success(data.message);
@@ -17,7 +17,7 @@ export default function useLogin() {
     },
   });
 
-  const { isLoading: isSigningUp, mutate: signup } = useMutation({
+  const { isPending: isSigningUp, mutate: signup } = useMutation({
     mutationFn: signupApi,
     onSuccess: (data) => {
       toast.success(data.message);

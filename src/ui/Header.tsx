@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 
 function Header({ children }) {
   const [open, setOpen] = useState(false);
-  const { isLoading, user } = useUser();
+  const { isLoading } = useUser();
 
   const handelClick = () => {
     setOpen(!open);
@@ -23,7 +23,9 @@ function Header({ children }) {
         <button onClick={handelClick}>
           <FaBars className="w-6 h-6 text-primary-700 lg:hidden" />
         </button>
-        <Navbar children={children} open={open} onClose={() => setOpen(false)} />
+        <Navbar open={open} onClose={() => setOpen(false)}>
+          {children}
+        </Navbar>
         <div className="flex justify-between items-center gap-4">
           <DarkmodeToggle />
           <UserAvatar />

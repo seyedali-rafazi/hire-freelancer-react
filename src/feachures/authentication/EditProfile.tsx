@@ -5,7 +5,6 @@ import useEditProfile from "./useEditProfile";
 import TextField from "../../ui/TextField";
 import useUser from "./useUser";
 import { useNavigate } from "react-router-dom";
-import HomeHeader from "../../ui/HomeHeader";
 import { HiOutlinePencil, HiPhone, HiMail, HiUser } from "react-icons/hi";
 
 const ROLE_LABELS = {
@@ -49,9 +48,7 @@ function EditProfile() {
   const statusInfo = STATUS_LABELS[user?.status] || STATUS_LABELS[2];
 
   return (
-    <div className="min-h-screen bg-secondery-0">
-      <HomeHeader />
-      <div className="container max-w-2xl mx-auto px-4 py-10 animate-fade-in-up">
+    <div className="container max-w-2xl mx-auto px-4 py-10 pb-16 animate-fade-in-up">
         <div className="profile-card mb-8">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="relative">
@@ -134,7 +131,6 @@ function EditProfile() {
             )}
           </form>
         </div>
-      </div>
     </div>
   );
 }

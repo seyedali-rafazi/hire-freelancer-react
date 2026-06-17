@@ -27,7 +27,7 @@ function CheckOTPForm({
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(60);
   const navigate = useNavigate();
-  const { isLoading, mutateAsync } = useMutation({
+  const { isPending: isLoading, mutateAsync } = useMutation({
     mutationFn: checkOtp,
   });
 

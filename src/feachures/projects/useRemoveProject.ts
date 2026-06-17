@@ -6,7 +6,7 @@ import { getErrorMessage } from "../../utils/getErrorMessage";
 export default function useRemoveProject() {
   const queryClient = useQueryClient();
 
-  const { mutate: removePproject, isLoading: isDeleting } = useMutation({
+  const { mutate: removePproject, isPending: isDeleting } = useMutation({
     mutationFn: removeProjectApi,
     onSuccess: (data) => {
       toast.success(data.message);

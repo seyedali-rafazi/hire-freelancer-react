@@ -21,7 +21,7 @@ const options = [
 ];
 
 function ChangeUserStatus({ userId, onClose }) {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
   const { changeUserStatus, isUpdating } = useUserStatus();
   const queryClient = useQueryClient();
 

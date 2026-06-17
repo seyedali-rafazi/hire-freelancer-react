@@ -1,10 +1,9 @@
-/** @type {import('tailwindcss').Config} */
-
+import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import tailwindFormPlugin from "@tailwindcss/forms";
 
-function withOpacity(variableName) {
-  return ({ opacityValue }) => {
+function withOpacity(variableName: string) {
+  return ({ opacityValue }: { opacityValue?: string }) => {
     if (opacityValue !== undefined) {
       return `rgba(var(${variableName}), ${opacityValue})`;
     }
@@ -13,7 +12,7 @@ function withOpacity(variableName) {
 }
 
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -56,7 +55,7 @@ export default {
   },
   plugins: [
     tailwindFormPlugin({
-      strategy: "class", // only generate classes
+      strategy: "class",
     }),
   ],
-};
+} satisfies Config;

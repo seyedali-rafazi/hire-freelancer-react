@@ -28,6 +28,7 @@ import { AuthenticationProvider } from "./context/AuthenticationContex";
 import RegisterOrder from "./pages/RegisterOrder";
 import EditProfile from "./feachures/authentication/EditProfile";
 import ScrollToTop from "./ui/ScroolToTop";
+import MainLayout from "./ui/MainLayout";
 const queryClient = new QueryClient();
 
 function App() {
@@ -82,16 +83,18 @@ function App() {
                 <Route path="proposals" element={<Proposals />} />
                 <Route path="projects" element={<SubmitedProjects />} />
               </Route>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="/recomended-projects"
-                element={<RecomendedProjects />}
-              />
-              <Route path="/sended-proposals" element={<SendedProposals />} />
-              <Route path="/favourit-projects" element={<FavouritProjects />} />
-              <Route path="/order-project" element={<RegisterOrder />} />
-              <Route path="/edit-profile" element={<EditProfile />} />
-              <Route path="*" element={<NotFound />} />
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/recomended-projects"
+                  element={<RecomendedProjects />}
+                />
+                <Route path="/sended-proposals" element={<SendedProposals />} />
+                <Route path="/favourit-projects" element={<FavouritProjects />} />
+                <Route path="/order-project" element={<RegisterOrder />} />
+                <Route path="/edit-profile" element={<EditProfile />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
             </Routes>
           </QueryClientProvider>
         </AddToFavouitProvider>

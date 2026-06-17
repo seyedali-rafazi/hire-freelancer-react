@@ -6,7 +6,7 @@ import { getErrorMessage } from "../../utils/getErrorMessage";
 export default function useToggelProjectStatus() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isUpdating, mutate: toggelProjectStatus } = useMutation({
+  const { isPending: isUpdating, mutate: toggelProjectStatus } = useMutation({
     mutationFn: toggelProjectStatusApi,
     onSuccess: (data) => {
       toast.success(data.message);

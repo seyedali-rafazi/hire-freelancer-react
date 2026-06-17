@@ -1,5 +1,4 @@
 import useUser from "../feachures/authentication/useUser";
-import HomeHeader from "../ui/HomeHeader";
 import FreelancerHomeSection from "../feachures/freelancer/FreelancerHomeSection";
 import OwnerHomerSection from "../feachures/owner/OwnerHomerSection";
 import { HiSparkles } from "react-icons/hi2";
@@ -10,9 +9,7 @@ function Home() {
   const isAdmin = user?.role === "ADMIN";
 
   return (
-    <div className="bg-secondery-0 min-h-screen">
-      <HomeHeader />
-
+    <>
       {!user && (
         <section className="hero-section animate-fade-in">
           <div className="container sm:max-w-6xl mx-auto px-4 py-16 md:py-24 text-center">
@@ -59,7 +56,7 @@ function Home() {
       <div className="container sm:max-w-6xl mx-auto px-4 pb-16">
         {isOwner ? <OwnerHomerSection /> : <FreelancerHomeSection user={user} />}
       </div>
-    </div>
+    </>
   );
 }
 

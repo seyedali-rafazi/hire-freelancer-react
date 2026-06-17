@@ -7,7 +7,7 @@ export default function useAuth() {
   const queryClient = useQueryClient();
 
   const {
-    isLoading: isCreating,
+    isPending: isCreating,
     mutate: createUser,
     mutateAsync,
   } = useMutation({
