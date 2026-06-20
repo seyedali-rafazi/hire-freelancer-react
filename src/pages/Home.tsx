@@ -2,6 +2,7 @@ import useUser from "../feachures/authentication/useUser";
 import FreelancerHomeSection from "../feachures/freelancer/FreelancerHomeSection";
 import OwnerHomerSection from "../feachures/owner/OwnerHomerSection";
 import { HiSparkles } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
 function Home() {
   const { user } = useUser();
@@ -26,12 +27,12 @@ function Home() {
               تخصص سازان پلتفرمی برای اتصال کارفرما و فریلنسر است. برای تست،
               با یک کلیک وارد شوید.
             </p>
-            <a
-              href="/auth"
+            <Link
+              to="/auth"
               className="inline-block btn btn--primary !px-8 !py-4 text-lg hover:scale-105 transition-transform"
             >
               شروع کنید — ورود دمو
-            </a>
+            </Link>
           </div>
         </section>
       )}
@@ -43,12 +44,12 @@ function Home() {
               شما به عنوان <strong>ادمین</strong> وارد شده‌اید. از منوی
               حساب کاربری به پنل مدیریت بروید.
             </p>
-            <a
-              href="/admin"
+            <Link
+              to="/admin"
               className="inline-block mt-4 btn btn--primary !px-6"
             >
               رفتن به پنل ادمین
-            </a>
+            </Link>
           </div>
         </section>
       )}

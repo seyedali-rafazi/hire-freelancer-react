@@ -9,9 +9,9 @@ interface HomeHeaderProps {
 
 function HomeHeader(_props: HomeHeaderProps) {
   return (
-    <div className="xl:max-w-screen-xl mx-auto sticky top-0 z-40 backdrop-blur-md bg-secondery-0/80">
+    <div className="w-full sticky top-0 z-40 backdrop-blur-md bg-secondery-0/80">
       <header className="border-b border-primary-100">
-        <ul className="flex gap-x-6 items-center justify-between p-4">
+        <ul className="flex gap-x-6 items-center justify-between p-4 xl:max-w-screen-xl mx-auto">
           <Link to="/" className="group">
             <h1 className="text-primary-700 font-extrabold text-xl md:text-3xl group-hover:text-primary-900 transition-colors">
               تخصص سازان
