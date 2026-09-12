@@ -44,13 +44,13 @@ export default function FeaturedProjectsSection({ user }: FeaturedProjectsSectio
           <div className="text-right space-y-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold">
               <HiSparkles className="w-3.5 h-3.5" />
-              <span>پروژه‌های باز و در انتظار پیشنهاد</span>
+              <span>موقعیت‌های شغلی فعال و در انتظار رزومه</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-secondery-900">
-              تازه‌ترین فرصت‌های همکاری
+              تازه‌ترین فرصت‌های شغلی و استخدامی
             </h2>
             <p className="text-secondery-500 text-sm sm:text-base">
-              از میان پروژه‌های فعال پلتفرم، پروژه مناسب تخصص خود را انتخاب و پیشنهاد ارسال کنید.
+              از میان آگهی‌های استخدامی شرکت‌های برتر کشور، موقعیت شغلی متناسب با تخصص خود را پیدا و رزومه ارسال کنید.
             </p>
           </div>
 
@@ -60,14 +60,14 @@ export default function FeaturedProjectsSection({ user }: FeaturedProjectsSectio
               className="btn btn--primary !py-2.5 !px-4 text-xs sm:text-sm font-bold flex items-center gap-2"
             >
               <HiPlusCircle className="w-4 h-4" />
-              <span>ثبت پروژه جدید</span>
+              <span>ثبت آگهی شغلی جدید</span>
             </Link>
             
             <Link
               href="/recomended-projects"
               className="py-2.5 px-4 rounded-xl border border-secondery-300 dark:border-secondery-700 hover:border-primary-500 text-secondery-700 dark:text-secondery-200 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors"
             >
-              <span>مشاهده همه ({toPersianNumbers(projects.length || 0)})</span>
+              <span>مشاهده همه روی نقشه ({toPersianNumbers(projects.length || 0)})</span>
               <HiArrowLeft className="w-4 h-4" />
             </Link>
           </div>

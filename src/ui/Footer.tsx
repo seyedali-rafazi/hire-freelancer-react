@@ -12,26 +12,26 @@ import { HiMail, HiPhone } from "react-icons/hi";
 
 const quickLinks = [
   { href: "/", label: "صفحه اصلی" },
-  { href: "/recomended-projects", label: "تمامی پروژه‌ها" },
-  { href: "/order-project", label: "ثبت رایگان پروژه" },
-  { href: "/#categories", label: "دسته‌بندی مهارت‌ها" },
-  { href: "/#how-it-works", label: "نحوه کار پلتفرم" },
+  { href: "/recomended-projects", label: "فرصت‌های شغلی و نقشه" },
+  { href: "/order-project", label: "ثبت آگهی استخدامی" },
+  { href: "/#categories", label: "دسته‌بندی مشاغل" },
+  { href: "/#how-it-works", label: "نحوه استخدام" },
   { href: "/#faq", label: "پرسش‌های متداول" },
 ];
 
 const categoryLinks = [
   { href: "/recomended-projects?search=برنامه‌نویسی", label: "برنامه‌نویسی و وب" },
-  { href: "/recomended-projects?search=طراحی", label: "طراحی و گرافیک UI/UX" },
-  { href: "/recomended-projects?search=موبایل", label: "اپلیکیشن موبایل (Flutter)" },
-  { href: "/recomended-projects?search=سئو", label: "سئو و دیجیتال مارکتینگ" },
   { href: "/recomended-projects?search=هوش مصنوعی", label: "هوش مصنوعی و داده" },
+  { href: "/recomended-projects?search=طراحی", label: "طراحی و گرافیک UI/UX" },
+  { href: "/recomended-projects?search=موبایل", label: "اپلیکیشن موبایل" },
+  { href: "/recomended-projects?search=سئو", label: "سئو و دیجیتال مارکتینگ" },
 ];
 
 const freelancerLinks = [
-  { href: "/sended-proposals", label: "پیشنهادهای ارسال‌شده" },
-  { href: "/favourit-projects", label: "پروژه‌های نشان‌شده" },
-  { href: "/edit-profile", label: "ویرایش پروفایل و مهارت‌ها" },
-  { href: "/auth", label: "ورود / عضویت فریلنسر" },
+  { href: "/sended-proposals", label: "درخواست‌های ارسال‌شده" },
+  { href: "/favourit-projects", label: "شغل‌های نشان‌شده" },
+  { href: "/edit-profile", label: "ویرایش پروفایل و رزومه" },
+  { href: "/auth", label: "ورود / عضویت کارجو و کارفرما" },
 ];
 
 function Footer() {
@@ -46,15 +46,15 @@ function Footer() {
           <div className="lg:col-span-2 space-y-4 text-right">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary-900 to-primary-600 flex items-center justify-center text-white font-black text-xl shadow-md">
-                ت
+                ک
               </div>
               <span className="text-2xl font-black text-primary-800 dark:text-primary-400 group-hover:text-primary-900 transition-colors">
-                تخصص سازان
+                کاریار
               </span>
             </Link>
 
             <p className="text-sm leading-relaxed text-secondery-500 max-w-md">
-              تخصص‌سازان بستر پیشرو در برون‌سپاری و انجام پروژه‌های تخصصی در سراسر کشور است. با بهره‌گیری از سیستم پرداخت امن (صندوق امانی) و فریلنسرهای ارزیابی‌شده، خیالتان از کیفیت و امنیت سرمایه آسوده است.
+              کاریار سامانه مدرن کاریابی هوشمند، مشاهده موقعیت‌های شغلی روی نقشه تاریک ایران و اتصال سریع کارجویان و متخصصان به شرکت‌های معتبر و پیشرو در سراسر کشور است.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">

@@ -43,6 +43,12 @@ export interface Project {
   createdAt: string;
   owner: ProjectOwner;
   freelancer: ProjectFreelancer | null;
+  company?: string;
+  city?: string;
+  coordinates?: [number, number];
+  jobType?: string;
+  salaryText?: string;
+  experienceLevel?: string;
 }
 
 export interface ProposalUser {

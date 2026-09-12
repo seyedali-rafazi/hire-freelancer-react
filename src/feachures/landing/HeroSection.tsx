@@ -60,22 +60,22 @@ export default function HeroSection({ user }: HeroSectionProps) {
             {/* Trust Pill */}
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-primary-100/80 dark:bg-primary-900/40 border border-primary-200 dark:border-primary-700/50 text-primary-900 dark:text-primary-300 text-xs md:text-sm font-bold animate-fade-in">
               <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-600"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
               </span>
               <HiSparkles className="w-4 h-4 text-primary-700 dark:text-primary-400" />
-              <span>پلتفرم هوشمند فریلنسری و برون‌سپاری پروژه</span>
+              <span>پلتفرم هوشمند کاریابی و ثبت آگهی‌های شغلی سراسر ایران</span>
               <span className="hidden sm:inline text-secondery-400">•</span>
-              <span className="hidden sm:inline font-normal text-secondery-600 dark:text-secondery-400">ضمانت پرداخت امن ۱۰۰٪</span>
+              <span className="hidden sm:inline font-normal text-secondery-600 dark:text-secondery-400">نمایش تعاملی روی نقشه</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] font-black text-secondery-900 leading-[1.25] tracking-tight">
-              برترین متخصصان و فریلنسرها،{" "}
+              فرصت‌های شغلی برتر و{" "}
               <br className="hidden sm:block" />
-              آماده اجرای{" "}
+              استخدام متخصصان در{" "}
               <span className="text-gradient relative">
-                پروژه‌های شما
+                سراسر ایران
                 <svg className="absolute -bottom-2 right-0 w-full h-2 text-primary-500/40" viewBox="0 0 100 10" preserveAspectRatio="none">
                   <path d="M0 5 Q 50 10, 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
                 </svg>
@@ -84,7 +84,7 @@ export default function HeroSection({ user }: HeroSectionProps) {
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg text-secondery-600 dark:text-secondery-300 max-w-2xl leading-relaxed">
-              با خیال آسوده پروژه خود را برون‌سپاری کنید؛ پیشنهادهای فریلنسرهای ارزیابی‌شده را مقایسه کنید و تنها پس از رضایت کامل از نتیجه، هزینه را آزاد کنید.
+              موقعیت‌های شغلی فعال کشور را روی نقشه هوشمند تاریک ایران مشاهده و مقایسه کنید؛ برای فرصت‌های ایده‌آل خود رزومه ارسال کنید و سریع‌تر استخدام شوید.
             </p>
 
             {/* Live Search Bar */}
@@ -97,7 +97,7 @@ export default function HeroSection({ user }: HeroSectionProps) {
               </div>
               <input
                 type="text"
-                placeholder="دنبال چه پروژه‌ای یا مهارتی می‌گردید؟ (مثلاً طراحی قالب، وردپرس، سئو...)"
+                placeholder="دنبال چه موقعیت شغلی یا شرکتی می‌گردید؟ (مثلاً برنامه‌نویس React، کارشناس سئو...)"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full bg-transparent py-2.5 px-2 text-sm md:text-base text-secondery-800 placeholder:text-secondery-400 focus:outline-none"
@@ -106,13 +106,13 @@ export default function HeroSection({ user }: HeroSectionProps) {
                 type="submit"
                 className="btn btn--primary !py-2.5 !px-5 whitespace-nowrap text-sm font-bold shrink-0"
               >
-                جستجو
+                جستجوی شغل
               </button>
             </form>
 
             {/* Popular Tags */}
             <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-secondery-500">
-              <span className="font-bold text-secondery-700 dark:text-secondery-400">جستجوهای پرطرفدار:</span>
+              <span className="font-bold text-secondery-700 dark:text-secondery-400">شغل‌های پرتقاضا:</span>
               {POPULAR_TAGS.map((tag) => (
                 <button
                   key={tag.label}
@@ -128,18 +128,18 @@ export default function HeroSection({ user }: HeroSectionProps) {
             {/* Dual CTAs & Quick Info */}
             <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
               <Link
-                href={user?.role === "OWNER" ? "/order-project" : user ? "/recomended-projects" : "/order-project"}
+                href="/order-project"
                 className="btn btn--primary !py-3.5 !px-6 text-center text-base font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary-800/25 hover:scale-[1.02] transition-transform"
               >
                 <HiBriefcase className="w-5 h-5" />
-                <span>ثبت رایگان پروژه (کارفرما)</span>
+                <span>ثبت آگهی استخدامی (کارفرما)</span>
               </Link>
               
               <Link
                 href="/recomended-projects"
                 className="py-3.5 px-6 rounded-xl border-2 border-primary-300 dark:border-primary-700 text-primary-800 dark:text-primary-300 font-bold text-center text-base hover:bg-primary-50 dark:hover:bg-primary-950/40 flex items-center justify-center gap-2 transition-all"
               >
-                <span>مشاهده و انجام پروژه‌ها</span>
+                <span>مشاهده موقعیت‌های شغلی روی نقشه</span>
                 <HiArrowLeft className="w-4 h-4" />
               </Link>
 

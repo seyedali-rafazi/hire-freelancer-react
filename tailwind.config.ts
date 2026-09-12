@@ -12,6 +12,7 @@ function withOpacity(variableName: string): any {
 }
 
 export default {
+  darkMode: "class",
   content: [
     "./src/**/*.{ts,tsx}",
     "./src/app/**/*.{ts,tsx}",
@@ -34,6 +35,7 @@ export default {
           100: withOpacity("--color-primary-100"),
         },
         secondery: {
+          950: withOpacity("--color-secondary-900"),
           900: withOpacity("--color-secondary-900"),
           800: withOpacity("--color-secondary-800"),
           700: withOpacity("--color-secondary-700"),

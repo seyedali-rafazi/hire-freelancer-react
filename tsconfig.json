@@ -45,6 +45,7 @@
   ],
   "exclude": [
     "node_modules",
+    ".next/dev",
     "eslint.config.ts",
     "vite.config.ts"
   ]

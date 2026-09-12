@@ -19,7 +19,20 @@ const KEYS = {
 function load(key, seed) {
   if (typeof window === "undefined") return seed;
   const stored = localStorage.getItem(key);
-  if (stored) return JSON.parse(stored);
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      // If projects key exists but is from old seed (lacks coordinates), re-seed
+      if (key === KEYS.projects && Array.isArray(parsed) && parsed.length > 0 && !parsed[0].coordinates) {
+        localStorage.setItem(key, JSON.stringify(seed));
+        return seed;
+      }
+      return parsed;
+    } catch {
+      localStorage.setItem(key, JSON.stringify(seed));
+      return seed;
+    }
+  }
   localStorage.setItem(key, JSON.stringify(seed));
   return seed;
 }
@@ -47,6 +60,8 @@ function parseQuery(qs = "") {
   return {
     search: params.get("search") || "",
     category: params.get("category") || "",
+    city: params.get("city") || "",
+    jobType: params.get("jobType") || "",
     status: params.get("status") || "",
     sort: params.get("sort") || "latest",
   };
@@ -162,7 +177,7 @@ export const mockStore = {
 
   async getProjects(qs = "") {
     await delay(300);
-    const { search, category, status, sort } = parseQuery(qs);
+    const { search, category, city, jobType, status, sort } = parseQuery(qs);
     let projects = load(KEYS.projects, SEED_PROJECTS);
 
     if (status === "OPEN" || status === "CLOSED") {
@@ -175,17 +190,26 @@ export const mockStore = {
     }
 
     if (search) {
+      const q = search.toLowerCase();
       projects = projects.filter(
         (p) =>
-          p.title.includes(search) ||
-          p.description.includes(search) ||
-          p.tags.some((t) => t.includes(search))
+          p.title?.toLowerCase().includes(q) ||
+          p.description?.toLowerCase().includes(q) ||
+          p.company?.toLowerCase().includes(q) ||
+          p.city?.toLowerCase().includes(q) ||
+          p.tags?.some((t) => t.toLowerCase().includes(q))
       );
     }
     if (!isAllFilter(category)) {
       projects = projects.filter(
-        (p) => p.category.englishTitle === category
+        (p) => p.category?.englishTitle === category
       );
+    }
+    if (!isAllFilter(city)) {
+      projects = projects.filter((p) => p.city === city);
+    }
+    if (!isAllFilter(jobType)) {
+      projects = projects.filter((p) => p.jobType?.includes(jobType));
     }
 
     return { projects: applySort(projects, sort) };
@@ -227,13 +251,34 @@ export const mockStore = {
     await delay(500);
     const { user } = await this.getCurrentUser();
     if (!user || user.role !== "OWNER") {
-      throw new Error("فقط کارفرما می‌تواند پروژه ثبت کند");
+      throw new Error("فقط کارفرما می‌تواند آگهی شغلی ثبت کند");
     }
     const projects = load(KEYS.projects, SEED_PROJECTS);
     const category = getCategoryById(data.category);
+    const city = data.city || "تهران";
+    const CITY_COORDINATES = {
+      تهران: [51.398, 35.759],
+      اصفهان: [51.666, 32.654],
+      مشهد: [59.606, 36.29],
+      شیراز: [52.523, 29.621],
+      تبریز: [46.321, 38.075],
+      کرج: [50.981, 35.82],
+      اهواز: [48.685, 31.338],
+      رشت: [49.588, 37.3],
+      یزد: [54.356, 31.867],
+      کیش: [53.978, 26.532],
+    };
+    const coords = data.coordinates || CITY_COORDINATES[city] || [51.389, 35.689];
+
     const newProject = {
-      _id: generateId("proj"),
+      _id: generateId("job"),
       title: data.title,
+      company: data.company || user.name || "شرکت کارفرما",
+      city,
+      coordinates: coords,
+      jobType: data.jobType || "تمام وقت",
+      salaryText: data.salaryText || `${Number(data.budget).toLocaleString("fa-IR")} تومان`,
+      experienceLevel: data.experienceLevel || "میان‌رده (Mid-level)",
       description: data.description,
       budget: Number(data.budget),
       category,
@@ -246,7 +291,7 @@ export const mockStore = {
     };
     projects.unshift(newProject);
     save(KEYS.projects, projects);
-    return { project: newProject, message: "پروژه با موفقیت ثبت شد" };
+    return { project: newProject, message: "آگهی شغلی با موفقیت ثبت شد" };
   },
 
   async editProject({ id, newProject }) {

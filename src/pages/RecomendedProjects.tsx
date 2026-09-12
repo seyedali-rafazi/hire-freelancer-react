@@ -5,7 +5,7 @@ import RecomendedProjectsLayout from "../feachures/recomended-projects/Recomende
 
 function RecomendedProjects() {
   return (
-    <div className="container lg:max-w-7xl px-4 pb-12">
+    <div className="w-full h-full">
       <Suspense fallback={<Loading />}>
         <RecomendedProjectsLayout />
       </Suspense>
