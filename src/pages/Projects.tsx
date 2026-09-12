@@ -1,10 +1,14 @@
-import React from "react";
+"use client";
+import React, { Suspense } from "react";
 import ProjectsTabel from "../feachures/projects/ProjectsTabel";
+import Loading from "../ui/Loading";
 
 function Projects() {
   return (
     <div>
-      <ProjectsTabel />
+      <Suspense fallback={<Loading />}>
+        <ProjectsTabel />
+      </Suspense>
     </div>
   );
 }

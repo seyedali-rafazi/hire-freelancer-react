@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useAddToFavourit } from "../context/AddToFavouitContext";
 import { TbHeart, TbHeartFilled } from "react-icons/tb";

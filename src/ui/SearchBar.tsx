@@ -1,22 +1,22 @@
-import { useState } from "react";
+"use client";
+import { useState, type FormEvent } from "react";
 import useCategories from "../hooks/useCategory";
-import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 
 function SearchBar() {
-  const [searchParams] = useSearchParams();
-  const [search, setSearchValue] = useState(searchParams.get("search") || "");
+  const searchParams = useSearchParams();
+  const [search, setSearchValue] = useState(searchParams?.get("search") || "");
   const [category, setCat] = useState("");
-  const navigate = useNavigate();
+  const router = useRouter();
   const { transformedCategories } = useCategories();
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: FormEvent) => {
     e.preventDefault();
-    const encodedParams = createSearchParams({ category, search });
-    navigate({
-      pathname: "/recomended-projects",
-      search: encodedParams.toString(),
-    });
+    const params = new URLSearchParams();
+    if (category && category !== "ALL") params.set("category", category);
+    if (search) params.set("search", search);
+    router.push(`/recomended-projects?${params.toString()}`);
   };
 
   return (

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 function ConfirmDelete({ resurse, onClose, disabled, onConfirm }) {

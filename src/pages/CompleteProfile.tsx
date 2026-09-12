@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import CompleteProfileForm from "../feachures/authentication/CompleteProfileForm";
 

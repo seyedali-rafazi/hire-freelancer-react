@@ -1,9 +1,10 @@
+"use client";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { checkOtp } from "../../services/authService";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { HiArrowRight } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 import Loading from "../../ui/Loading";
@@ -26,7 +27,7 @@ function CheckOTPForm({
 }: CheckOTPFormProps) {
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(60);
-  const navigate = useNavigate();
+  const router = useRouter();
   const { isPending: isLoading, mutateAsync } = useMutation({
     mutationFn: checkOtp,
   });
@@ -42,14 +43,14 @@ function CheckOTPForm({
       if (message) toast.success(message);
       if (!user) return;
       if (!user.isActive) {
-        return navigate("/complete-profile");
+        return router.push("/complete-profile");
       }
       if (user.status !== 2) {
-        navigate("/");
+        router.push("/");
         toast("پروفایل شما در انتظار تایید است.", { icon: "👏" });
         return;
       }
-      navigate("/");
+      router.push("/");
     } catch (error) {
       toast.error(getErrorMessage(error));
     }

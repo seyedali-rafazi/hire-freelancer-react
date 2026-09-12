@@ -1,3 +1,4 @@
+"use client";
 import AuthContainer from "../feachures/authentication/AuthContainer";
 
 function Auth() {

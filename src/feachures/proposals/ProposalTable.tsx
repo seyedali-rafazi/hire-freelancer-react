@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import useProposals from "./useProposals";
 import Empty from "../../ui/Empty";

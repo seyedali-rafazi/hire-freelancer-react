@@ -1,3 +1,4 @@
+"use client";
 import Empty from "../../ui/Empty";
 import Table from "../../ui/Table";
 import ProposalRow from "./proposalRow";

@@ -1,3 +1,4 @@
+"use client";
 import TextField from "../../ui/TextField";
 import { useForm } from "react-hook-form";
 import RHFSelect from "../../ui/RHFSelect";

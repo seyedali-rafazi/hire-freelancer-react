@@ -1,3 +1,4 @@
+"use client";
 import FilterDropdown from "../../../ui/FilterDropdown";
 import useCategories from "../../../hooks/useCategory";
 import Filter from "../../../ui/Filter";

@@ -1,13 +1,16 @@
+"use client";
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 export default function useDefaultFilter(
   defaults: Record<string, string> = {}
 ) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    const next = new URLSearchParams(searchParams);
+    const next = new URLSearchParams(searchParams ? searchParams.toString() : "");
     let changed = false;
 
     Object.entries(defaults).forEach(([key, value]) => {
@@ -17,6 +20,8 @@ export default function useDefaultFilter(
       }
     });
 
-    if (changed) setSearchParams(next, { replace: true });
+    if (changed) {
+      router.replace(`${pathname}?${next.toString()}`);
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 }

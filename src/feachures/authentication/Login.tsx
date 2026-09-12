@@ -1,12 +1,13 @@
+"use client";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 function Login() {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <button
-      onClick={() => navigate("/auth")}
+      onClick={() => router.push("/auth")}
       className="btn-action py-2 px-4 hover:scale-105"
     >
       <span>ورود دمو</span>

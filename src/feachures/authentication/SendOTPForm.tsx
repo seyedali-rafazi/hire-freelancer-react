@@ -1,15 +1,16 @@
+"use client";
 import React from "react";
 import TextField from "../../ui/TextField";
 import Loading from "../../ui/Loading";
 import { useForm } from "react-hook-form";
 import useAuth from "./useAuth";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { getErrorMessage } from "../../utils/getErrorMessage";
 
 function SendOTPForm() {
   const { isCreating, mutateAsync } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -18,15 +19,15 @@ function SendOTPForm() {
   const onCkickSubmit = async (data) => {
     try {
       const { user } = await mutateAsync(data);
-      if (!user.isActive) return navigate("/complete-profile");
+      if (!user.isActive) return router.push("/complete-profile");
       if (Number(user.status) !== 2) {
-        navigate("/");
+        router.push("/");
         toast("پروفایل شما در انتظار تایید است", { icon: "👏" });
         return;
       }
-      if (user.role === "OWNER") return navigate("/");
-      if (user.role === "FREELANCER") return navigate("/");
-      if (user.role === "ADMIN") return navigate("/admin");
+      if (user.role === "OWNER") return router.push("/");
+      if (user.role === "FREELANCER") return router.push("/");
+      if (user.role === "ADMIN") return router.push("/admin");
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
@@ -56,7 +57,7 @@ function SendOTPForm() {
           placeholder=" رمز عبور:"
           errors={errors}
           name="password"
-          type="فثطف"
+          type="password"
           register={register}
           validationSchema={{
             required: "رمزعبور همراه ضروری است",

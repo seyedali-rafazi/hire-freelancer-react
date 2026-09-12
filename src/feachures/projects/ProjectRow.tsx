@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Table from "../../ui/Table";
 import { toPersianNumbersWithComma } from "../../utils/formatNumber";
@@ -10,7 +11,7 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 import useRemoveProject from "./useRemoveProject";
 import CreateProjectForm from "./CreateProjectForm";
 import ToggleProjectStatus from "./ToggleProjectStatus";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 function ProjectRow({ project, index }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -69,7 +70,7 @@ function ProjectRow({ project, index }) {
         </Modal>
       </td>
       <td>
-        <Link className="flex justify-center" to={project._id}>
+        <Link className="flex justify-center" href={`/owner/projects/${project._id}`}>
           <HiEye className="icon icon--primary " />
         </Link>
       </td>

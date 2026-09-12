@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+import { useRouter } from "next/navigation";
 
 export default function useMoveBack() {
-  const navigate = useNavigate();
-  return () => navigate(-1);
+  const router = useRouter();
+  return () => router.back();
 }

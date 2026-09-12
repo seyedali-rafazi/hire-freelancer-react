@@ -1,9 +1,16 @@
-import { useEffect } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiOutlineX } from "react-icons/hi";
 import type { ModalProps } from "../types";
 
 function Modal({ open, onClose, title, children }: ModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -22,7 +29,7 @@ function Modal({ open, onClose, title, children }: ModalProps) {
     return () => document.removeEventListener("keydown", handleKey);
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!mounted || !open) return null;
 
   return createPortal(
     <div

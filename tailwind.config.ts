@@ -12,7 +12,13 @@ function withOpacity(variableName: string) {
 }
 
 export default {
-  content: ["./index.html", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./src/**/*.{ts,tsx}",
+    "./src/app/**/*.{ts,tsx}",
+    "./src/ui/**/*.{ts,tsx}",
+    "./src/feachures/**/*.{ts,tsx}",
+    "./src/pages/**/*.{ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {

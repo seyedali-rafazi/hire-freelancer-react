@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import Table from "../../../ui/Table";
 import { toPersianNumbersWithComma } from "../../../utils/formatNumber";

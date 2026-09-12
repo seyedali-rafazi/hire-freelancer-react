@@ -1,3 +1,5 @@
+"use client";
+import { Suspense } from "react";
 import Loading from "../ui/Loading";
 import useUser from "../feachures/authentication/useUser";
 import SendedProposalsLayout from "../feachures/recomended-projects/SendedProposalsLayout";
@@ -8,7 +10,9 @@ function SendedProposals() {
 
   return (
     <div className="container lg:max-w-7xl px-4 pb-12">
-      <SendedProposalsLayout />
+      <Suspense fallback={<Loading />}>
+        <SendedProposalsLayout />
+      </Suspense>
     </div>
   );
 }

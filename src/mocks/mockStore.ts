@@ -17,6 +17,7 @@ const KEYS = {
 };
 
 function load(key, seed) {
+  if (typeof window === "undefined") return seed;
   const stored = localStorage.getItem(key);
   if (stored) return JSON.parse(stored);
   localStorage.setItem(key, JSON.stringify(seed));
@@ -24,6 +25,7 @@ function load(key, seed) {
 }
 
 function save(key, data) {
+  if (typeof window === "undefined") return;
   localStorage.setItem(key, JSON.stringify(data));
 }
 
@@ -67,6 +69,7 @@ function applySort(projects, sort) {
 export const mockStore = {
   async getCurrentUser() {
     await delay(150);
+    if (typeof window === "undefined") return { user: null };
     const stored = localStorage.getItem(KEYS.currentUser);
     if (!stored) return { user: null };
     const user = JSON.parse(stored);
@@ -111,7 +114,9 @@ export const mockStore = {
 
   async logout() {
     await delay(200);
-    localStorage.removeItem(KEYS.currentUser);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(KEYS.currentUser);
+    }
     return { message: "با موفقیت خارج شدید" };
   },
 
@@ -371,6 +376,8 @@ export const mockStore = {
   },
 
   resetDemoData() {
-    Object.values(KEYS).forEach((key) => localStorage.removeItem(key));
+    if (typeof window !== "undefined") {
+      Object.values(KEYS).forEach((key) => localStorage.removeItem(key));
+    }
   },
 };

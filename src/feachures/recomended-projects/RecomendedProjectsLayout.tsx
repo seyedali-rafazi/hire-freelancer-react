@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import SidebarPages from "../../ui/SidebarPages";
 import OptionsSidebar from "../../ui/OptionsSidebar";
@@ -21,10 +22,10 @@ function RecomendedProjectsLayout() {
           {user ? <SidebarPages /> : <NotUser />}
         </div>
         <div className="lg:col-span-5 flex flex-col gap-4">
-          <ProjectsFilter numOfProjects={projects.length} />
-          <ProjectCards projects={projects} smOrder="oneSm" mdOrder="oneMd" />
+          <ProjectsFilter numOfProjects={projects?.length || 0} />
+          <ProjectCards projects={projects || []} smOrder="oneSm" mdOrder="oneMd" />
         </div>
-        <div className="hidden md:block md:h-64  lg:col-span-3 ">
+        <div className="hidden md:block md:h-64 lg:col-span-3">
           <OptionsSidebar />
         </div>
       </div>

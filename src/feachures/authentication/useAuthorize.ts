@@ -1,4 +1,5 @@
-import { useLocation } from "react-router-dom";
+"use client";
+import { usePathname } from "next/navigation";
 import useUser from "./useUser";
 import type { UserRole } from "../../types";
 
@@ -10,7 +11,7 @@ const ROLES: Record<string, UserRole> = {
 
 export default function useAuthorize() {
   const { isLoading, user } = useUser();
-  const { pathname } = useLocation();
+  const pathname = usePathname() || "";
 
   const isAuthenticated = Boolean(user);
   const isVerified = user ? Number(user.status) === 2 : false;

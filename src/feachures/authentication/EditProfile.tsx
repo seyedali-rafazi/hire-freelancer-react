@@ -1,10 +1,11 @@
+"use client";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Loading from "../../ui/Loading";
 import useEditProfile from "./useEditProfile";
 import TextField from "../../ui/TextField";
 import useUser from "./useUser";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { HiOutlinePencil, HiPhone, HiMail, HiUser } from "react-icons/hi";
 
 const ROLE_LABELS = {
@@ -23,7 +24,7 @@ const STATUS_LABELS = {
 function EditProfile() {
   const { isLoading: isSaving, editProfile } = useEditProfile();
   const { user, isLoading } = useUser();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const {
     register,
@@ -39,7 +40,7 @@ function EditProfile() {
   }, [user, reset]);
 
   const onSubmit = (data) => {
-    editProfile(data, { onSuccess: () => navigate("/") });
+    editProfile(data, { onSuccess: () => router.push("/") });
   };
 
   if (isLoading) return <Loading />;

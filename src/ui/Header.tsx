@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import UserAvatar from "../feachures/authentication/UserAvatar";
 import useUser from "../feachures/authentication/useUser";

@@ -1,9 +1,10 @@
+"use client";
 import React from "react";
 import RHFSelect from "../../ui/RHFSelect";
 import { useForm } from "react-hook-form";
 import useChangeProposalStatus from "./useChangeProposalStatus";
 import { useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useParams } from "next/navigation";
 import Loading from "../../ui/Loading";
 
 const options = [
@@ -22,7 +23,8 @@ const options = [
 ];
 
 function ChangeProposalStatus({ proposalId, onClose }) {
-  const { id: projectId } = useParams();
+  const params = useParams();
+  const projectId = typeof params?.id === "string" ? params.id : Array.isArray(params?.id) ? params.id[0] : "";
   const { register, handleSubmit } = useForm();
   const { changeProposalStatus, isUpdating } = useChangeProposalStatus();
   const queryClient = useQueryClient();

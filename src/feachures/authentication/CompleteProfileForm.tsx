@@ -1,22 +1,23 @@
+"use client";
 import React, { useEffect } from "react";
 import TextField from "../../ui/TextField";
 import { useMutation } from "@tanstack/react-query";
 import { completeProfile } from "../../services/authService";
 import Loading from "../../ui/Loading";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import RadioInputGroup from "../../ui/RadioInputGroup";
 import useUser from "./useUser";
 import { getErrorMessage } from "../../utils/getErrorMessage";
 
 function CompleteProfileForm() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { user } = useUser();
 
   useEffect(() => {
-    if (user && user.isActive) navigate("/", { replace: true });
-  }, [user, navigate]);
+    if (user && user.isActive) router.replace("/");
+  }, [user, router]);
 
   const {
     register,
@@ -34,15 +35,15 @@ function CompleteProfileForm() {
       const { user, message } = response.data.data;
       toast.success(message);
       if (user.status !== 2) {
-        navigate("/");
+        router.push("/");
         toast("پروفایل شما در انتظار تایید است.", { icon: "👏" });
         return;
       }
       if (user.role == "OWNER") {
-        return navigate("/");
+        return router.push("/");
       }
       if (user.role == "FREELANCER") {
-        return navigate("/");
+        return router.push("/");
       }
     } catch (error) {
       toast.error(getErrorMessage(error));

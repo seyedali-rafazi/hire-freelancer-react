@@ -1,20 +1,29 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+"use client";
+import React, { ReactNode } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-function SidebarNavlink({ children, path }) {
+interface SidebarNavlinkProps {
+  children: ReactNode;
+  path: string;
+}
+
+function SidebarNavlink({ children, path }: SidebarNavlinkProps) {
+  const pathname = usePathname();
+  const isActive = pathname === path;
   const sidebarStyles =
     "text-sm text-secondery-800 font-bold p-3 hover:bg-primary-700 hover:text-white transition-all duration-200";
 
   return (
-    <NavLink
-      to={path}
-      className={({ isActive }) =>
+    <Link
+      href={path}
+      className={
         isActive
           ? `${sidebarStyles} bg-primary-700 text-white`
-          : `${sidebarStyles}`
+          : sidebarStyles
       }>
       {children}
-    </NavLink>
+    </Link>
   );
 }
 

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import { useQueryClient } from "@tanstack/react-query";
@@ -11,7 +12,9 @@ function Logout() {
     await logutApi();
     queryClient.setQueryData(["get-user"], { user: null });
     toast.success("با موفقیت خارج شدید");
-    window.location.href = "/";
+    if (typeof window !== "undefined") {
+      window.location.href = "/";
+    }
   };
 
   return (

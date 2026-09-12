@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+import { useRouter } from "next/navigation";
 import { HiPlusCircle, HiClipboardDocumentList } from "react-icons/hi2";
 
 function HomeOrderSection() {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <div className="animate-fade-in-up">
@@ -18,14 +19,14 @@ function HomeOrderSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <button
-              onClick={() => navigate("/order-project")}
+              onClick={() => router.push("/order-project")}
               className="flex items-center justify-center gap-2 btn btn--primary !px-6 !py-3.5 hover:scale-105 transition-transform"
             >
               <HiPlusCircle className="w-5 h-5" />
               <span>ثبت پروژه جدید</span>
             </button>
             <button
-              onClick={() => navigate("/owner/projects")}
+              onClick={() => router.push("/owner/projects")}
               className="flex items-center justify-center gap-2 border-2 border-primary-300 text-primary-700 font-bold py-3.5 px-6 rounded-xl hover:bg-primary-50 transition-all"
             >
               <HiClipboardDocumentList className="w-5 h-5" />

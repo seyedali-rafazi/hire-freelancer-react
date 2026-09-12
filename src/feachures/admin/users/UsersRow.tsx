@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Table from "../../../ui/Table";
 import Modal from "../../../ui/Modal";
@@ -30,8 +31,8 @@ function UsersRow({ user, index }) {
       <td>{phoneNumber}</td>
       <td>{role}</td>
       <td>
-        <span className={`badge ${userStatus[status].className} `}>
-          {userStatus[status].label}
+        <span className={`badge ${userStatus[status]?.className || "badge--secondary"}`}>
+          {userStatus[status]?.label || "-"}
         </span>
       </td>
       <td>

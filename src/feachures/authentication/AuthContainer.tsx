@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+"use client";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import {
   HiShieldCheck,
@@ -47,7 +48,7 @@ function AuthContainer() {
   const [signupRole, setSignupRole] = useState("OWNER");
   const { loginAs, isLoggingIn, signup, isSigningUp } = useLogin();
   const { user } = useUser();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const {
     register,
@@ -56,20 +57,21 @@ function AuthContainer() {
     reset,
   } = useForm();
 
-  if (user) {
-    const path =
-      user.role === "ADMIN"
-        ? "/admin"
-        : user.role === "OWNER"
-          ? "/"
+  useEffect(() => {
+    if (user) {
+      const path =
+        user.role === "ADMIN"
+          ? "/admin"
           : "/";
-    navigate(path);
-    return null;
-  }
+      router.push(path);
+    }
+  }, [user, router]);
+
+  if (user) return null;
 
   const handleLogin = (role, path) => {
     loginAs(role, {
-      onSuccess: () => navigate(path),
+      onSuccess: () => router.push(path),
     });
   };
 
@@ -79,7 +81,7 @@ function AuthContainer() {
       {
         onSuccess: () => {
           reset();
-          navigate("/");
+          router.push("/");
         },
       }
     );

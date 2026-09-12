@@ -1,5 +1,5 @@
+"use client";
 import { useState } from "react";
-
 import { toPersianNumbersWithComma } from "../utils/formatNumber";
 
 import toLocalDateShort from "../utils/toLocalDateShort";

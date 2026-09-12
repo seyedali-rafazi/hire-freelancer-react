@@ -1,3 +1,4 @@
+"use client";
 import { createContext, useContext } from "react";
 import useLocalStorageState from "../hooks/useLocalStorageState";
 import type { ChildrenProps, Project } from "../types";

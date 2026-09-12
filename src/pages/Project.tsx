@@ -1,3 +1,4 @@
+"use client";
 import useProject from "../feachures/project/useProject";
 import Loading from "../ui/Loading";
 import ProjectHeader from "../feachures/project/ProjectHeader";

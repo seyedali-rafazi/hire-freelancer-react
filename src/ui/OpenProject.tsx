@@ -1,14 +1,15 @@
+"use client";
 import { TbBriefcase } from "react-icons/tb";
 import useProjects from "../hooks/useProjects";
 import ProjectCards from "./ProjectCards";
 import { toPersianNumbers } from "../utils/formatNumber";
 import { HiArrowLeft } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import Loading from "./Loading";
 
 function OpenProject() {
   const { projects, isLoading } = useProjects();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   if (isLoading) return <Loading />;
 
@@ -32,7 +33,7 @@ function OpenProject() {
 
       <div className="flex justify-center">
         <button
-          onClick={() => navigate("/recomended-projects")}
+          onClick={() => router.push("/recomended-projects")}
           className="flex items-center gap-2 border-2 border-primary-300 text-primary-700 py-3 px-6 rounded-xl font-bold hover:bg-primary-800 hover:text-white hover:border-primary-800 transition-all duration-300"
         >
           <span>مشاهده همه</span>

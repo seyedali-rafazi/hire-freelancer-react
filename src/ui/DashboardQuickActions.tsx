@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import type { ElementType } from "react";
 
-function DashboardQuickActions({ actions }) {
+interface Action {
+  path: string;
+  label: string;
+  desc: string;
+  icon: ElementType;
+}
+
+interface DashboardQuickActionsProps {
+  actions?: Action[];
+}
+
+function DashboardQuickActions({ actions }: DashboardQuickActionsProps) {
   if (!actions?.length) return null;
 
   return (
@@ -8,7 +20,7 @@ function DashboardQuickActions({ actions }) {
       {actions.map((action) => (
         <Link
           key={action.path}
-          to={action.path}
+          href={action.path}
           className="quick-action-card group"
         >
           <action.icon className="w-5 h-5 text-primary-700 group-hover:text-white transition-colors" />

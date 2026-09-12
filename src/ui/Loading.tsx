@@ -1,3 +1,4 @@
+"use client";
 import { ThreeDots } from "react-loader-spinner";
 
 interface LoadingProps {

@@ -1,13 +1,14 @@
+"use client";
 import React, { useState } from "react";
 import { toPersianNumbersWithComma } from "../utils/formatNumber";
 import toLocalDateShort from "../utils/toLocalDateShort";
 import Modal from "./Modal";
 import SendedPropopsal from "../feachures/order-projects/SendedPropopsal";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 function OwnerProjectCard({ project }) {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <div
@@ -44,7 +45,7 @@ function OwnerProjectCard({ project }) {
             {toLocalDateShort(project.createdAt)}
           </p>
           <button
-            onClick={() => navigate(`/owner/projects/${project._id}`)}
+            onClick={() => router.push(`/owner/projects/${project._id}`)}
             className="bg-primary-900 text-secondery-0 py-2 px-3 rounded-xl hover:bg-primary-800 transition-all duration-300">
             درخواست های ارسال شده
           </button>

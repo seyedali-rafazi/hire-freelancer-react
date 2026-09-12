@@ -1,3 +1,4 @@
+"use client";
 import useUser from "../feachures/authentication/useUser";
 
 const ROLE_CONFIG = {

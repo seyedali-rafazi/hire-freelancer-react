@@ -1,3 +1,4 @@
+"use client";
 import Table from "../../../ui/Table";
 import Loading from "../../../ui/Loading";
 import Empty from "../../../ui/Empty";

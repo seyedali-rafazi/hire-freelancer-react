@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import { useDarkMode } from "../context/DarkModeContext";
 
@@ -6,7 +6,7 @@ function DarkmodeToggle() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   return (
     <div>
-      <button onClick={toggleDarkMode} className="items-center flex">
+      <button onClick={toggleDarkMode} className="items-center flex" aria-label="تغییر حالت تاریک/روشن">
         {isDarkMode ? (
           <HiOutlineSun className="icon text-primary-900 h-6 w-6" />
         ) : (

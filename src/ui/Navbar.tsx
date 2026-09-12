@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect } from "react";
 import useOutsideClick from "../hooks/useOutsideClick";
 import { HiOutlineX } from "react-icons/hi";

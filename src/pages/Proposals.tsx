@@ -1,5 +1,7 @@
-import React from "react";
+"use client";
+import React, { Suspense } from "react";
 import ProposalTable from "../feachures/proposals/ProposalTable";
+import Loading from "../ui/Loading";
 
 function Proposals() {
   return (
@@ -7,7 +9,9 @@ function Proposals() {
       <h1 className="font-black text-secondery-700 text-xl mb-8">
         لیست پروپوزال ها
       </h1>
-      <ProposalTable />
+      <Suspense fallback={<Loading />}>
+        <ProposalTable />
+      </Suspense>
     </div>
   );
 }

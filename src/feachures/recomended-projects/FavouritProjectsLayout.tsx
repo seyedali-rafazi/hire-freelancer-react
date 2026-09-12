@@ -1,5 +1,6 @@
+"use client";
 import { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "next/navigation";
 import SidebarPages from "../../ui/SidebarPages";
 import OptionsSidebar from "../../ui/OptionsSidebar";
 import UserFavouitProjects from "../../ui/UserFavouitProjects";
@@ -11,8 +12,8 @@ import NotUser from "./NotUser";
 function FavouritProjectsLayout() {
   const { myFavourits = [] } = useAddToFavourit();
   const { user } = useUser();
-  const [searchParams] = useSearchParams();
-  const sort = searchParams.get("sort") || "latest";
+  const searchParams = useSearchParams();
+  const sort = searchParams?.get("sort") || "latest";
 
   const sortedFavourits = useMemo(() => {
     const list = [...myFavourits];

@@ -1,10 +1,3 @@
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css";
-import { BrowserRouter } from "react-router-dom";
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
+// This file is deprecated following migration from Vite to Next.js App Router.
+// The Next.js application entry point is src/app/layout.tsx and src/app/providers.tsx.
+export {};

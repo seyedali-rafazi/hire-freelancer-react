@@ -1,8 +1,9 @@
+"use client";
 import { HiOutlinePencil } from "react-icons/hi";
 import Logout from "../feachures/authentication/Logout";
 import useOutsideClick from "../hooks/useOutsideClick";
 import { TbPaperclip, TbHome, TbReportSearch, TbLayoutDashboard } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 const ROLE_LABELS = {
   USER: "کاربر",
@@ -36,21 +37,21 @@ const MENU_BY_ROLE = {
 
 function AccounDropDown({ open, onClose, user }) {
   const modalRef = useOutsideClick<HTMLUListElement>(onClose);
-  const navigate = useNavigate();
+  const router = useRouter();
 
-  const menuItems = MENU_BY_ROLE[user.role] || MENU_BY_ROLE.USER;
+  const menuItems = MENU_BY_ROLE[user?.role] || MENU_BY_ROLE.USER;
 
-  const handleNavigate = (path) => {
+  const handleNavigate = (path: string) => {
     onClose();
-    navigate(path);
+    router.push(path);
   };
 
   const handleEditProfile = () => {
     onClose();
-    navigate("/edit-profile");
+    router.push("/edit-profile");
   };
 
-  if (!open) return null;
+  if (!open || !user) return null;
 
   return (
     <div className="fixed inset-0 z-50">

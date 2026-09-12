@@ -1,14 +1,28 @@
-import { useSearchParams } from "react-router-dom";
+"use client";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
-function Filter({ filterField, options }) {
-  const [searchParams, setSearchParams] = useSearchParams();
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface FilterProps {
+  filterField: string;
+  options: Option[];
+}
+
+function Filter({ filterField, options }: FilterProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const currentFilter =
-    searchParams.get(filterField) ?? options.at(0)?.value ?? "";
+    searchParams?.get(filterField) ?? options.at(0)?.value ?? "";
 
-  function handleClick(value) {
-    const next = new URLSearchParams(searchParams);
+  function handleClick(value: string) {
+    const next = new URLSearchParams(searchParams ? searchParams.toString() : "");
     next.set(filterField, value);
-    setSearchParams(next);
+    router.push(`${pathname}?${next.toString()}`);
   }
 
   return (

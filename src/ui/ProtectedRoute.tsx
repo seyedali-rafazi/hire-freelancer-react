@@ -1,31 +1,32 @@
+"use client";
 import { useEffect } from "react";
 import useAuthorize from "../feachures/authentication/useAuthorize";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import Loading from "./Loading";
 import toast from "react-hot-toast";
 import type { ChildrenProps } from "../types";
 
 function ProtectedRoute({ children }: ChildrenProps) {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { isAuthenticated, isLoading, isAuthorized, isVerified } =
     useAuthorize();
 
   useEffect(() => {
     if (isLoading) return;
     if (!isAuthenticated) {
-      navigate("/auth");
+      router.push("/auth");
       return;
     }
     if (!isVerified) {
       toast.error("پروفایل شما در انتظار تایید است.");
-      navigate("/");
+      router.push("/");
       return;
     }
     if (!isAuthorized) {
       toast.error("شما به این بخش دسترسی ندارید.");
-      navigate("/");
+      router.push("/");
     }
-  }, [isAuthenticated, isAuthorized, isLoading, navigate, isVerified]);
+  }, [isAuthenticated, isAuthorized, isLoading, router, isVerified]);
 
   if (isLoading) {
     return (

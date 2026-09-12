@@ -1,12 +1,16 @@
-import React from "react";
+"use client";
+import React, { Suspense } from "react";
 import ProjectsHeader from "../feachures/freelancer/project/ProjectsHeader";
 import ProjectsTable from "../feachures/freelancer/project/ProjectsTable";
+import Loading from "../ui/Loading";
 
 function SubmitedProjects() {
   return (
     <div>
-      <ProjectsHeader />
-      <ProjectsTable />
+      <Suspense fallback={<Loading />}>
+        <ProjectsHeader />
+        <ProjectsTable />
+      </Suspense>
     </div>
   );
 }

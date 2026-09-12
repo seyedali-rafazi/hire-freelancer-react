@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import useOwnerProjects from "./useOwnerProjects";
 import Loading from "../../ui/Loading";
@@ -5,6 +6,7 @@ import Table from "../../ui/Table";
 import ProjectRow from "./ProjectRow";
 import ProjectHeader from "./ProjectHeader";
 import Empty from "../../ui/Empty";
+
 function ProjectsTabel() {
   const { projects, isLoading } = useOwnerProjects();
   if (isLoading) {

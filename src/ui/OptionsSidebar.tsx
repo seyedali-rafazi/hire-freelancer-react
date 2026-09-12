@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import FilterDropdown from "./FilterDropdown";
 import useCategories from "../hooks/useCategory";

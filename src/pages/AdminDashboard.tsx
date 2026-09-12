@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 import DashboardLayout from '../feachures/admin/DashboardLayout'
 
@@ -5,7 +6,8 @@ function AdminDashboard() {
   return (
     <div>
       <DashboardLayout />
-    </div>  )
+    </div>
+  );
 }
 
 export default AdminDashboard

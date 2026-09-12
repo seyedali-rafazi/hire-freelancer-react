@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { HiPlus } from "react-icons/hi";
 import Modal from "../../ui/Modal";

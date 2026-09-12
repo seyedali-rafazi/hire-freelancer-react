@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import RHFSelect from "../../../ui/RHFSelect";
 import Loading from "../../../ui/Loading";
@@ -26,7 +27,6 @@ function ChangeUserStatus({ userId, onClose }) {
   const queryClient = useQueryClient();
 
   const onSubmit = (data) => {
-
     changeUserStatus(
       { userId, data },
       {

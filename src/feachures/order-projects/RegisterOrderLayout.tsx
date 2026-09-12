@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Loading from "../../ui/Loading";
 import ProjectsFilter from "../../ui/ProjectsFilter";
@@ -7,11 +8,8 @@ import OwnerProjectCards from "../../ui/OwnerProjectCards";
 import useOwnerProjects from "../projects/useOwnerProjects";
 import RegisterOneOrder from "./RegisterOneOrder";
 
-
 function RegisterOrderLayout() {
-  const { isLoading, projects } = useOwnerProjects();
-
-
+  const { isLoading, projects = [] } = useOwnerProjects();
 
   if (isLoading) return <Loading />;
   return (
@@ -29,7 +27,7 @@ function RegisterOrderLayout() {
             mdOrder="oneMd"
           />
         </div>
-        <div className="hidden md:block md:h-64  lg:col-span-3 ">
+        <div className="hidden md:block md:h-64 lg:col-span-3">
           <OptionsSidebar />
         </div>
       </div>

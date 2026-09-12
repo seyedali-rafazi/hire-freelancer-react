@@ -1,5 +1,6 @@
+"use client";
 import { HiArrowRight } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import useMoveBack from "../hooks/useMoveBack";
 
 function NotFound() {
@@ -23,7 +24,7 @@ function NotFound() {
             <HiArrowRight />
             <span>برگشت</span>
           </button>
-          <Link to="/" className="btn btn--primary">
+          <Link href="/" className="btn btn--primary">
             صفحه اصلی
           </Link>
         </div>
