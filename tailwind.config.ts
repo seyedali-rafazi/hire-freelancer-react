@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import tailwindFormPlugin from "@tailwindcss/forms";
 
-function withOpacity(variableName: string) {
+function withOpacity(variableName: string): any {
   return ({ opacityValue }: { opacityValue?: string }) => {
     if (opacityValue !== undefined) {
       return `rgba(var(${variableName}), ${opacityValue})`;
