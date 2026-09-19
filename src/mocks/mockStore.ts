@@ -22,8 +22,8 @@ function load(key, seed) {
   if (stored) {
     try {
       const parsed = JSON.parse(stored);
-      // If projects key exists but is from old seed (lacks coordinates), re-seed
-      if (key === KEYS.projects && Array.isArray(parsed) && parsed.length > 0 && !parsed[0].coordinates) {
+      // If projects key exists but is from old seed (lacks country or has fewer jobs), re-seed
+      if (key === KEYS.projects && Array.isArray(parsed) && (parsed.length < 20 || !parsed[0].country)) {
         localStorage.setItem(key, JSON.stringify(seed));
         return seed;
       }

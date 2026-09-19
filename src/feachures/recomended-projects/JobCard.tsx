@@ -80,7 +80,13 @@ export default function JobCard({
             <span>•</span>
             <div className="flex items-center gap-1 font-semibold text-secondery-600 dark:text-secondery-300">
               <HiMapPin className="w-4 h-4 text-rose-500 shrink-0" />
-              <span>{job.city || "سراسر کشور"}</span>
+              <span>
+                {job.city
+                  ? job.country
+                    ? `${job.city}، ${job.country}`
+                    : job.city
+                  : job.country || "سراسر جهان"}
+              </span>
             </div>
           </div>
         </div>

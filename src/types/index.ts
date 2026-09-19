@@ -44,6 +44,9 @@ export interface Project {
   owner: ProjectOwner;
   freelancer: ProjectFreelancer | null;
   company?: string;
+  country?: string;
+  countryEn?: string;
+  countryCode?: string;
   city?: string;
   coordinates?: [number, number];
   jobType?: string;

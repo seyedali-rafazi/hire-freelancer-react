@@ -13,10 +13,7 @@ import {
   HiXMark,
   HiChevronUp,
   HiChevronDown,
-  HiAdjustmentsHorizontal,
-  HiBuildingOffice2,
-  HiCurrencyDollar,
-  HiChevronLeft,
+  HiGlobeAmericas,
 } from "react-icons/hi2";
 
 // Dynamically import JobMap to disable SSR for WebGL/MapLibre GL & Deck.gl
@@ -25,24 +22,10 @@ const JobMap = dynamic(() => import("./JobMap"), {
   loading: () => (
     <div className="w-full h-full min-h-[400px] bg-slate-950 flex flex-col items-center justify-center gap-3 text-slate-400">
       <span className="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin" />
-      <span className="text-sm font-bold text-slate-300">در حال راه‌اندازی نقشه تاریک ایران...</span>
+      <span className="text-sm font-bold text-slate-300">در حال بارگذاری نقشه جهانی موقعیت‌های شغلی...</span>
     </div>
   ),
 });
-
-const CITIES = [
-  "همه شهرها",
-  "تهران",
-  "اصفهان",
-  "مشهد",
-  "شیراز",
-  "تبریز",
-  "کرج",
-  "اهواز",
-  "رشت",
-  "یزد",
-  "کیش",
-];
 
 const CATEGORIES = [
   { id: "ALL", label: "همه تخصص‌ها" },
@@ -59,17 +42,29 @@ export default function RecomendedProjectsLayout() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("ALL");
-  const [selectedCity, setSelectedCity] = useState("همه شهرها");
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
 
-  // Mobile Bottom Sheet / Drawer state (سایدبار از پایین بازشو در موبایل)
+  // Mobile Bottom Sheet / Drawer state
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
   const sidebarScrollRef = useRef<HTMLDivElement | null>(null);
 
-  // Client-side instant filtering
+  // Client-side filtering by country, category, search query
   const filteredJobs = useMemo(() => {
     return projects.filter((job) => {
+      // Country filter
+      if (selectedCountry) {
+        const target = selectedCountry.toLowerCase();
+        const matchCountry =
+          job.country?.toLowerCase() === target ||
+          job.countryEn?.toLowerCase() === target ||
+          job.countryCode?.toLowerCase() === target;
+        if (!matchCountry) {
+          return false;
+        }
+      }
+
       // Search filter
       if (searchTerm.trim()) {
         const q = searchTerm.toLowerCase();
@@ -77,8 +72,11 @@ export default function RecomendedProjectsLayout() {
         const matchCompany = job.company?.toLowerCase().includes(q);
         const matchDesc = job.description?.toLowerCase().includes(q);
         const matchCity = job.city?.toLowerCase().includes(q);
+        const matchCountry =
+          job.country?.toLowerCase().includes(q) ||
+          job.countryEn?.toLowerCase().includes(q);
         const matchTags = job.tags?.some((t) => t.toLowerCase().includes(q));
-        if (!matchTitle && !matchCompany && !matchDesc && !matchCity && !matchTags) {
+        if (!matchTitle && !matchCompany && !matchDesc && !matchCity && !matchCountry && !matchTags) {
           return false;
         }
       }
@@ -90,16 +88,9 @@ export default function RecomendedProjectsLayout() {
         }
       }
 
-      // City filter
-      if (selectedCity !== "همه شهرها") {
-        if (job.city !== selectedCity) {
-          return false;
-        }
-      }
-
       return true;
     });
-  }, [projects, searchTerm, selectedCategory, selectedCity]);
+  }, [projects, searchTerm, selectedCategory, selectedCountry]);
 
   // Currently selected job object
   const selectedJob = useMemo(() => {
@@ -113,9 +104,16 @@ export default function RecomendedProjectsLayout() {
 
   const handleFocusMap = (job: Project) => {
     setSelectedJobId(job._id);
-    // On mobile, minimize drawer so the user sees the map centered on the job!
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       setIsMobileDrawerOpen(false);
+    }
+  };
+
+  const handleCountrySelect = (countryProps: any | null) => {
+    if (!countryProps) {
+      setSelectedCountry(null);
+    } else {
+      setSelectedCountry(countryProps.nameFa || countryProps.name);
     }
   };
 
@@ -130,12 +128,11 @@ export default function RecomendedProjectsLayout() {
       <div className="w-full lg:w-2/3 xl:w-[68%] h-full flex-1 relative order-2 lg:order-1">
         <JobMap
           jobs={filteredJobs}
+          allJobs={projects}
           selectedJobId={selectedJobId}
-          onSelectJob={(job) => {
-            handleSelectJob(job);
-          }}
-          activeCity={selectedCity === "همه شهرها" ? "همه ایران" : selectedCity}
-          onCityChange={(city) => setSelectedCity(city === "همه ایران" ? "همه شهرها" : city)}
+          onSelectJob={handleSelectJob}
+          selectedCountry={selectedCountry}
+          onSelectCountry={handleCountrySelect}
         />
       </div>
 
@@ -151,13 +148,30 @@ export default function RecomendedProjectsLayout() {
             <div className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
               <h2 className="font-black text-sm text-secondery-900 dark:text-secondery-100">
-                موقعیت‌های شغلی فعال
+                {selectedCountry ? `فرصت‌های شغلی ${selectedCountry}` : "موقعیت‌های شغلی جهانی"}
               </h2>
             </div>
             <span className="text-[11px] font-bold bg-primary-50 dark:bg-primary-950/60 text-primary-700 dark:text-primary-300 border border-primary-200 dark:border-primary-800/60 px-2 py-0.5 rounded-full">
               {filteredJobs.length.toLocaleString("fa-IR")} آگهی
             </span>
           </div>
+
+          {/* Active Country Filter Tag */}
+          {selectedCountry && (
+            <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-primary-50 dark:bg-primary-950/50 border border-primary-200 dark:border-primary-800 text-xs">
+              <div className="flex items-center gap-1.5 font-bold text-primary-700 dark:text-primary-300">
+                <HiMapPin className="w-4 h-4 text-rose-500 shrink-0" />
+                <span className="truncate">کشور انتخاب شده: {selectedCountry}</span>
+              </div>
+              <button
+                onClick={() => setSelectedCountry(null)}
+                className="text-[11px] font-extrabold text-primary-600 dark:text-primary-400 hover:text-primary-800 flex items-center gap-0.5 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-md border border-primary-200 dark:border-primary-700 shadow-sm shrink-0"
+              >
+                <span>کل جهان</span>
+                <HiXMark className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
 
           {/* Search Input */}
           <div className="relative">
@@ -166,7 +180,7 @@ export default function RecomendedProjectsLayout() {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="جستجوی شغل، شرکت، مهارت یا شهر..."
+              placeholder="جستجوی شغل، شرکت، مهارت یا کشور..."
               className="w-full pr-9 pl-7 py-2 text-xs rounded-xl bg-secondery-50 dark:bg-secondery-900 border border-secondery-200 dark:border-secondery-700 text-secondery-900 dark:text-secondery-100 placeholder:text-secondery-400 focus:outline-none focus:ring-2 focus:ring-primary-500 font-medium transition-all"
             />
             {searchTerm && (
@@ -209,16 +223,20 @@ export default function RecomendedProjectsLayout() {
           {filteredJobs.length === 0 ? (
             <div className="p-8 text-center bg-secondery-50/50 dark:bg-secondery-900/30 rounded-2xl border border-dashed border-secondery-300 dark:border-secondery-800 text-secondery-500 mt-6">
               <HiBriefcase className="w-10 h-10 mx-auto text-secondery-400 mb-2" />
-              <p className="font-extrabold text-xs">آگهی شغلی با فیلترهای انتخابی یافت نشد.</p>
+              <p className="font-extrabold text-xs">
+                {selectedCountry
+                  ? `موقعیت شغلی برای کشور ${selectedCountry} با فیلترهای انتخابی یافت نشد.`
+                  : "آگهی شغلی با فیلترهای انتخابی یافت نشد."}
+              </p>
               <button
                 onClick={() => {
                   setSearchTerm("");
                   setSelectedCategory("ALL");
-                  setSelectedCity("همه شهرها");
+                  setSelectedCountry(null);
                 }}
                 className="mt-2 text-xs font-bold text-primary-600 hover:underline"
               >
-                پاک کردن فیلترها
+                پاک کردن فیلترها و مشاهده کل جهان
               </button>
             </div>
           ) : (
@@ -264,7 +282,7 @@ export default function RecomendedProjectsLayout() {
                         {selectedJob.title}
                       </h4>
                       <p className="text-[11px] text-secondery-500 truncate">
-                        {selectedJob.company} • {selectedJob.city}
+                        {selectedJob.company} • {selectedJob.city || selectedJob.country}
                       </p>
                     </div>
                     <button
@@ -294,7 +312,10 @@ export default function RecomendedProjectsLayout() {
                 >
                   <div className="flex items-center gap-2">
                     <HiBriefcase className="w-4 h-4" />
-                    <span>مشاهده آگهی‌های شغلی ({filteredJobs.length.toLocaleString("fa-IR")} موقعیت)</span>
+                    <span>
+                      {selectedCountry ? `آگهی‌های ${selectedCountry}` : "مشاهده آگهی‌های جهانی"}{" "}
+                      ({filteredJobs.length.toLocaleString("fa-IR")} موقعیت)
+                    </span>
                   </div>
                   <div className="flex items-center gap-1 text-[11px] opacity-90">
                     <span>باز کردن</span>
@@ -330,7 +351,7 @@ export default function RecomendedProjectsLayout() {
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                     <h3 className="font-extrabold text-sm text-secondery-900 dark:text-secondery-100">
-                      فرصت‌های شغلی ایران
+                      {selectedCountry ? `فرصت‌های شغلی ${selectedCountry}` : "فرصت‌های شغلی جهانی"}
                     </h3>
                     <span className="text-[11px] font-bold bg-primary-100 dark:bg-primary-950/80 text-primary-700 dark:text-primary-300 px-2 py-0.5 rounded-full">
                       {filteredJobs.length.toLocaleString("fa-IR")}
@@ -347,6 +368,23 @@ export default function RecomendedProjectsLayout() {
                   </button>
                 </div>
 
+                {/* Active Country Filter Tag in Mobile */}
+                {selectedCountry && (
+                  <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-primary-50 dark:bg-primary-950/50 border border-primary-200 dark:border-primary-800 text-xs mb-2">
+                    <div className="flex items-center gap-1.5 font-bold text-primary-700 dark:text-primary-300">
+                      <HiMapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+                      <span>کشور: {selectedCountry}</span>
+                    </div>
+                    <button
+                      onClick={() => setSelectedCountry(null)}
+                      className="text-[11px] font-extrabold text-primary-600 dark:text-primary-400 hover:text-primary-800 flex items-center gap-0.5 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-md border border-primary-200 dark:border-primary-700"
+                    >
+                      <span>همه جهان</span>
+                      <HiXMark className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
+
                 {/* Search in Drawer */}
                 <div className="relative mb-2">
                   <HiMagnifyingGlass className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-secondery-400" />
@@ -354,7 +392,7 @@ export default function RecomendedProjectsLayout() {
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="جستجوی شغل، شرکت، مهارت یا شهر..."
+                    placeholder="جستجوی شغل، شرکت، مهارت یا کشور..."
                     className="w-full pr-9 pl-7 py-2 text-xs rounded-xl bg-secondery-50 dark:bg-secondery-900 border border-secondery-200 dark:border-secondery-700 text-secondery-900 dark:text-secondery-100 placeholder:text-secondery-400 focus:outline-none focus:ring-2 focus:ring-primary-500 font-medium"
                   />
                   {searchTerm && (
@@ -392,7 +430,21 @@ export default function RecomendedProjectsLayout() {
               <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
                 {filteredJobs.length === 0 ? (
                   <div className="p-8 text-center text-secondery-500">
-                    <p className="font-extrabold text-xs">موقعیت شغلی با این فیلترها یافت نشد.</p>
+                    <p className="font-extrabold text-xs">
+                      {selectedCountry
+                        ? `موقعیت شغلی برای کشور ${selectedCountry} یافت نشد.`
+                        : "موقعیت شغلی با این فیلترها یافت نشد."}
+                    </p>
+                    <button
+                      onClick={() => {
+                        setSearchTerm("");
+                        setSelectedCategory("ALL");
+                        setSelectedCountry(null);
+                      }}
+                      className="mt-2 text-xs font-bold text-primary-600 hover:underline"
+                    >
+                      مشاهده فرصت‌های شغلی همه جهان
+                    </button>
                   </div>
                 ) : (
                   filteredJobs.map((job) => (
